@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: 
+globs: 
+alwaysApply: true
+---
+## Tech Stack (Docker)
+
+- Symfony 6.4.21 (LTS)
+- PHP 8.3.4
+- Symfony Live Components
+- Bootstrap 5.3.5
+- Baza Danych MySQL 8.0.39
+
+## 🧪 Testing & Quality
+
+- Behat (Gherkin, BDD feature tests)
+- PHPUnit / phpspec (unit testing)
+- PHPStan (static analysis)
+- Fake/adapted test doubles (np. `FakeLLMClient`)
+
+Always use libraries and frameworks available in [package.json](mdc:package.json) and @composer.json
