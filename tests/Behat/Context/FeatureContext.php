@@ -25,6 +25,15 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function clearDatabase(): void
     {
+                // === POCZĄTEK TYMCZASOWEGO DEBUGOWANIA ===
+                echo "--- DEBUG: Inside clearDatabase() ---\n";
+                echo "Getenv DATABASE_URL: " . (getenv('DATABASE_URL') ?: 'NOT FOUND') . "\n";
+                echo "SERVER DATABASE_URL: " . ($_SERVER['DATABASE_URL'] ?? 'NOT FOUND') . "\n";
+                echo "ENV DATABASE_URL: " . ($_ENV['DATABASE_URL'] ?? 'NOT FOUND') . "\n";
+                // Możesz tymczasowo zatrzymać wykonywanie, żeby zobaczyć tylko ten output:
+                // die("--- DEBUG: Stopping after checking env vars ---");
+                // === KONIEC TYMCZASOWEGO DEBUGOWANIA ===
+                
         $this->entityManager->getConnection()->executeQuery('SET FOREIGN_KEY_CHECKS = 0');
         $this->entityManager->getConnection()->executeQuery('TRUNCATE TABLE doctrine_migration_versions');
         $this->entityManager->getConnection()->executeQuery('SET FOREIGN_KEY_CHECKS = 1');

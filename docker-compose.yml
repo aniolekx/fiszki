@@ -8,8 +8,7 @@ services:
     depends_on:
       - mysql
     environment:
-      - DATABASE_URL=mysql://fiszki:fiszki@mysql:3306/fiszki?serverVersion=8.0.39
-      - DATABASE_TEST_URL=mysql://fiszki:fiszki@mysql:3306/fiszki_test?serverVersion=8.0.39
+      - DATABASE_TEST_URL=mysql://fiszki:fiszki@mysql:3306/fiszki?serverVersion=8.0.39
       - APP_ENV=dev
       - APP_SECRET=${APP_SECRET:-ThisTokenIsNotSoSecretChangeIt}
     networks:
