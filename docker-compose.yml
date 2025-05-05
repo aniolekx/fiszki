@@ -1,0 +1,51 @@
+services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_URL=mysql://fiszki:fiszki@mysql:3306/fiszki?serverVersion=8.0.39
+      - DATABASE_TEST_URL=mysql://fiszki:fiszki@mysql:3306/fiszki_test?serverVersion=8.0.39
+      - APP_ENV=dev
+      - APP_SECRET=${APP_SECRET:-ThisTokenIsNotSoSecretChangeIt}
+    networks:
+      - fiszki-network
+
+  nginx:
+    image: nginx:1.25-alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - php-fpm
+    networks:
+      - fiszki-network
+
+  mysql:
+    image: mysql:8.0.39
+    environment:
+      - MYSQL_DATABASE=fiszki
+      - MYSQL_USER=fiszki
+      - MYSQL_PASSWORD=fiszki
+      - MYSQL_ROOT_PASSWORD=root
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - fiszki-network
+
+networks:
+  fiszki-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
