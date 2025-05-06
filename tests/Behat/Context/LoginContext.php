@@ -7,7 +7,7 @@ namespace App\Tests\Behat\Context;
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
 use App\Repository\DoctrineUserRepository;
-use App\Domain\User\Entity\User;
+use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Behat\Gherkin\Node\PyStringNode;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +29,7 @@ class LoginContext extends MinkContext implements Context
      */
     public function clearDatabase(BeforeScenarioScope $scope): void
     {
-        $this->entityManager->createQuery('DELETE FROM App\Domain\User\Entity\User u')->execute();
+        $this->entityManager->createQuery('DELETE FROM App\Entity\User u')->execute();
         $this->entityManager->flush();
     }
 

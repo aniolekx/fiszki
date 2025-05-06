@@ -1,0 +1,82 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Panel główny{% endblock %}
+
+{% block body_content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <h1>Panel główny</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Statystyki</h5>
+                            <p class="card-text">Liczba talii: {{ total_decks }}</p>
+                            <p class="card-text">Liczba fiszek: {{ total_flashcards }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Twoje talie</h5>
+                    <a href="{{ path('deck_new') }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i> Nowa talia
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if decks|length > 0 %}
+                        <div class="list-group">
+                            {% for deck in decks %}
+                                <a href="{{ path('deck_show', {'id': deck.id}) }}" class="list-group-item list-group-item-action">
+                                    {{ deck.name }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted">Nie masz jeszcze żadnych talii.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Twoje fiszki</h5>
+                    <a href="{{ path('flashcard_new') }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i> Nowa fiszka
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if flashcards|length > 0 %}
+                        <div class="list-group">
+                            {% for flashcard in flashcards|slice(0, 5) %}
+                                <div class="list-group-item">
+                                    <h6 class="mb-1">{{ flashcard.front }}</h6>
+                                    <p class="mb-1 text-muted">{{ flashcard.back }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if flashcards|length > 5 %}
+                            <div class="text-center mt-3">
+                                <a href="{{ path('flashcard_index') }}" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-list"></i> Zobacz wszystkie
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <p class="text-muted">Nie masz jeszcze żadnych fiszek.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

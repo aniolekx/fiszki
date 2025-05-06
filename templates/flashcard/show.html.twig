@@ -3,17 +3,19 @@
 {% block title %}Flashcard Details{% endblock %}
 
 {% block body %}
-    <h1>Flashcard Details</h1>
+    <div class="container mt-4">
+        <h1 class="mb-4">Flashcard Details</h1>
 
-    <div>
-        <strong>Front:</strong>
-        {{ flashcard.front }}
-    </div>
-    <div>
-        <strong>Back:</strong>
-        {{ flashcard.back }}
-    </div>
+        <div class="mb-3">
+            <strong>Front:</strong>
+            {{ flashcard.front }}
+        </div>
+        <div class="mb-3">
+            <strong>Back:</strong>
+            {{ flashcard.back }}
+        </div>
 
-    <a href="{{ path('flashcard_edit', {'id': flashcard.id}) }}">Edit</a>
-    <a href="{{ path('flashcard_index') }}">Back to list</a>
+        <a href="{{ path('flashcard_edit', {'id': flashcard.id}) }}" class="btn btn-primary">Edit</a>
+        <a href="{{ path('flashcard_index') }}" class="btn btn-secondary">Back to list</a>
+    </div>
 {% endblock %}

@@ -16,8 +16,9 @@ class DeckController extends AbstractController
     #[Route('/', name: 'deck_index', methods: ['GET'])]
     public function index(DeckRepository $deckRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('deck/index.html.twig', [
-            'decks' => $deckRepository->findAll(),
+            'decks' => $deckRepository->findBy(['user' => $user]),
         ]);
     }
 
@@ -25,6 +26,8 @@ class DeckController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $deck = new Deck();
+        $deck->setUser($this->getUser());
+        
         $form = $this->createFormBuilder($deck)
             ->add('name')
             ->getForm();
@@ -34,6 +37,7 @@ class DeckController extends AbstractController
             $entityManager->persist($deck);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Talia została utworzona.');
             return $this->redirectToRoute('deck_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -46,6 +50,7 @@ class DeckController extends AbstractController
     #[Route('/{id}', name: 'deck_show', methods: ['GET'])]
     public function show(Deck $deck): Response
     {
+        $this->denyAccessUnlessGranted('view', $deck);
         return $this->render('deck/show.html.twig', [
             'deck' => $deck,
         ]);
@@ -54,6 +59,8 @@ class DeckController extends AbstractController
     #[Route('/{id}/edit', name: 'deck_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Deck $deck, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('edit', $deck);
+        
         $form = $this->createFormBuilder($deck)
             ->add('name')
             ->getForm();
@@ -62,6 +69,7 @@ class DeckController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Talia została zaktualizowana.');
             return $this->redirectToRoute('deck_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -74,9 +82,12 @@ class DeckController extends AbstractController
     #[Route('/{id}', name: 'deck_delete', methods: ['POST'])]
     public function delete(Request $request, Deck $deck, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('delete', $deck);
+        
         if ($this->isCsrfTokenValid('delete'.$deck->getId(), $request->request->get('_token'))) {
             $entityManager->remove($deck);
             $entityManager->flush();
+            $this->addFlash('success', 'Talia została usunięta.');
         }
 
         return $this->redirectToRoute('deck_index', [], Response::HTTP_SEE_OTHER);

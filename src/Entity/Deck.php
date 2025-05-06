@@ -6,8 +6,10 @@ use App\Repository\DeckRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: DeckRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Deck
 {
     #[ORM\Id]
@@ -22,11 +24,25 @@ class Deck
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'deck', targetEntity: Flashcard::class, orphanRemoval: true)]
-    private ArrayCollection $flashcards;
+    private Collection $flashcards;
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function __construct()
     {
         $this->flashcards = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -83,5 +99,15 @@ class Deck
         }
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
     }
 }

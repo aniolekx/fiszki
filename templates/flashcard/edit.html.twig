@@ -3,13 +3,19 @@
 {% block title %}Edit Flashcard{% endblock %}
 
 {% block body %}
-    <h1>Edit Flashcard</h1>
+    <div class="container mt-4">
+        <h1 class="mb-4">Edit Flashcard</h1>
 
-    {{ form_start(form) }}
-        {{ form_row(form.front) }}
-        {{ form_row(form.back) }}
-        <button type="submit">Update</button>
-    {{ form_end(form) }}
+        {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_row(form.front) }}
+            </div>
+            <div class="mb-3">
+                {{ form_row(form.back) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        {{ form_end(form) }}
 
-    <a href="{{ path('flashcard_index') }}">Back to list</a>
+        <a href="{{ path('flashcard_index') }}" class="btn btn-secondary mt-3">Back to list</a>
+    </div>
 {% endblock %}

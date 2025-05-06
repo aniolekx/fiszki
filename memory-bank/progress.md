@@ -2,7 +2,7 @@
 
 ## 1. What Works
 
-*   **User Entity:** `src/Domain/User/Entity/User.php` exists.
+*   **User Entity:** `src/Entity/User.php` exists.
 *   **User Repository:** `src/Repository/DoctrineUserRepository.php` exists.
 *   **Database Schema:** Initial migration `migrations/Version20250505103002.php` likely created the `user` table.
 *   **User Creation Command:** `src/Command/CreateUserCommand.php` allows creating users via CLI.
