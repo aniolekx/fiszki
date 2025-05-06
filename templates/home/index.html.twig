@@ -3,6 +3,87 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body_content %}
-    <h1>Welcome to the Fiszki App!</h1>
-    <p>This is the homepage content.</p>
+    <!-- Hero Section -->
+    <section class="py-5 text-center">
+        <div class="container">
+            <h1 class="display-4 mb-3">Welcome to the Fiszki App!</h1>
+            <p class="lead">Your go-to solution for learning and memorizing new information.</p>
+            <a href="#features" class="btn btn-primary btn-lg mt-3">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Key Features</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Flashcards</h5>
+                            <p class="card-text">Create and study flashcards to memorize information effectively.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Quizzes</h5>
+                            <p class="card-text">Test your knowledge with interactive quizzes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Progress Tracking</h5>
+                            <p class="card-text">Track your learning progress and set goals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="bg-light py-5">
+        <div class="container text-center">
+            <h2 class="mb-3">Ready to Start Learning?</h2>
+            <p class="lead mb-4">Sign up today and take your first step towards mastering new information.</p>
+            <a href="#signup" class="btn btn-success btn-lg">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Sample Cards Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Sample Cards</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Card Title 1</h5>
+                            <p class="card-text">This is a sample card with some placeholder text.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Card Title 2</h5>
+                            <p class="card-text">This is another sample card with some placeholder text.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Card Title 3</h5>
+                            <p class="card-text">This is a third sample card with some placeholder text.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock body_content %}

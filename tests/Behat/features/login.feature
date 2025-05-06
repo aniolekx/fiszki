@@ -12,8 +12,9 @@ Feature: User Login
     When I fill in the login field "email" with "aniolekx@gmail.com"
     And I fill in the login field "password" with "correctPassword"
     And I press "Zaloguj się"
-    Then I should be redirected to the "/test" page
-    And I should see "Welcome, aniolekx@gmail.com"
+    Then I should be redirected to the "/" page
+    And I should see "Witaj, aniolekx@gmail.com"
+    And I follow "Wyloguj"
 
   Scenario: Failed login with invalid password
     Given I am on the "/login" page
@@ -29,4 +30,4 @@ Feature: User Login
     And I fill in the login field "password" with "anyPassword"
     And I press "Zaloguj się"
     Then I should still be on the "/login" page
-    And I should see the error message "The presented password is invalid."
+    And I should see the error message "Email could not be found."
