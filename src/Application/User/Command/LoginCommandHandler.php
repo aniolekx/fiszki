@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\User\Command;
 
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Repository\DoctrineUserRepository;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 final readonly class LoginCommandHandler
 {
     public function __construct(
-        private UserRepositoryInterface $userRepository,
+        private DoctrineUserRepository $userRepository,
         private UserPasswordHasherInterface $passwordHasher
     ) {
     }

@@ -1,0 +1,15 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Deck Details{% endblock %}
+
+{% block body %}
+    <h1>Deck Details</h1>
+
+    <div>
+        <strong>Name:</strong>
+        {{ deck.name }}
+    </div>
+
+    <a href="{{ path('deck_edit', {'id': deck.id}) }}">Edit</a>
+    <a href="{{ path('deck_index') }}">Back to list</a>
+{% endblock %}

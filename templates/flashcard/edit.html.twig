@@ -1,0 +1,15 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Edit Flashcard{% endblock %}
+
+{% block body %}
+    <h1>Edit Flashcard</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.front) }}
+        {{ form_row(form.back) }}
+        <button type="submit">Update</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('flashcard_index') }}">Back to list</a>
+{% endblock %}

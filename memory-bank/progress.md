@@ -3,7 +3,7 @@
 ## 1. What Works
 
 *   **User Entity:** `src/Domain/User/Entity/User.php` exists.
-*   **User Repository:** `src/Repository/DoctrineUserRepository.php` exists and implements `UserRepositoryInterface`.
+*   **User Repository:** `src/Repository/DoctrineUserRepository.php` exists.
 *   **Database Schema:** Initial migration `migrations/Version20250505103002.php` likely created the `user` table.
 *   **User Creation Command:** `src/Command/CreateUserCommand.php` allows creating users via CLI.
 *   **Basic Login Form:** `templates/security/login.html.twig` renders a login form.

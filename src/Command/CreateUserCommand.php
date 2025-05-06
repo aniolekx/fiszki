@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Domain\User\Entity\User;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Entity\User;
+use App\Repository\DoctrineUserRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface; // Import Validato
 class CreateUserCommand extends Command
 {
     public function __construct(
-        private readonly UserRepositoryInterface $userRepository,
+        private readonly DoctrineUserRepository $userRepository,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly ValidatorInterface $validator // Inject Validator
     ) {

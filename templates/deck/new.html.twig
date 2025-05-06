@@ -1,0 +1,14 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}New Deck{% endblock %}
+
+{% block body %}
+    <h1>Create New Deck</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        <button type="submit">Create</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('deck_index') }}">Back to list</a>
+{% endblock %}

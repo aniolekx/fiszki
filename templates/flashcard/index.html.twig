@@ -1,0 +1,40 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Flashcards{% endblock %}
+
+{% block body %}
+    <h1>Flashcards</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Front</th>
+                <th>Back</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for flashcard in flashcards %}
+            <tr>
+                <td>{{ flashcard.front }}</td>
+                <td>{{ flashcard.back }}</td>
+                <td>
+                    <a href="{{ path('flashcard_show', {'id': flashcard.id}) }}">Show</a>
+                    <a href="{{ path('flashcard_edit', {'id': flashcard.id}) }}">Edit</a>
+                    <form action="{{ path('flashcard_delete', {'id': flashcard.id}) }}" method="post" style="display: inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        {{ csrf_token('delete'~flashcard.id) }}
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No flashcards found.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('flashcard_new') }}">Create new Flashcard</a>
+{% endblock %}

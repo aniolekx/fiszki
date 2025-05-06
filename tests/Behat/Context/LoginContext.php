@@ -6,7 +6,7 @@ namespace App\Tests\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Repository\DoctrineUserRepository;
 use App\Domain\User\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Behat\Gherkin\Node\PyStringNode;
@@ -18,7 +18,7 @@ use Behat\Step\Then;
 class LoginContext extends MinkContext implements Context
 {
     public function __construct(
-        private readonly UserRepositoryInterface $userRepository,
+        private readonly DoctrineUserRepository $userRepository,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly EntityManagerInterface $entityManager
     ) {

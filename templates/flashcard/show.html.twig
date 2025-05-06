@@ -1,0 +1,19 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Flashcard Details{% endblock %}
+
+{% block body %}
+    <h1>Flashcard Details</h1>
+
+    <div>
+        <strong>Front:</strong>
+        {{ flashcard.front }}
+    </div>
+    <div>
+        <strong>Back:</strong>
+        {{ flashcard.back }}
+    </div>
+
+    <a href="{{ path('flashcard_edit', {'id': flashcard.id}) }}">Edit</a>
+    <a href="{{ path('flashcard_index') }}">Back to list</a>
+{% endblock %}

@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\User\Entity;
+namespace App\Entity;
 
 use App\Repository\DoctrineUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: DoctrineUserRepository::class)]
 #[ORM\Table(name: 'users')]
@@ -17,9 +18,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    
     #[ORM\Column(length: 180, unique: true)]
     private string $email;
+    
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Deck::class, orphanRemoval: true)]
+    private Collection $decks;
 
     #[ORM\Column]
     private ?string $password = null;
