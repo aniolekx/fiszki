@@ -22,6 +22,10 @@ class SecurityController extends AbstractController
     #[Route('/login', name: 'app_login', methods: ['GET', 'POST'])] // Re-allow POST
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_home'); // Redirect to home if already logged in
+        }
+
         // Get the login error if there is one (handled by security bundle)
         $error = $authenticationUtils->getLastAuthenticationError();
 

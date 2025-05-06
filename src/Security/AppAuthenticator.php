@@ -87,7 +87,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
         // Default redirection (e.g., to dashboard or main page)
         // Using 'app_test' as the default redirect for now.
-        return new RedirectResponse($this->urlGenerator->generate('app_test'));
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
     protected function getLoginUrl(Request $request): string
