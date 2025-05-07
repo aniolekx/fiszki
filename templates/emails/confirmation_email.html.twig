@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Please Confirm Your Email{% endblock %}
+
+{% block body %}
+    <h1>Hi {{ email }}!</h1>
+
+    <p>
+        Please confirm your email address by clicking the following link:
+        <br><br>
+        <a href="{{ url('app_verify_email', {token: confirmationToken}) }}">Confirm my Email</a>.
+        This link will expire in {{ tokenLifetime|date('g') }} hours.
+    </p>
+
+    <p>
+        Cheers!
+    </p>
+{% endblock %}

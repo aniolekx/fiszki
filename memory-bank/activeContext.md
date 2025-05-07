@@ -1,27 +1,37 @@
-# Active Context: Fiszki (2025-05-05 16:56)
+# Active Context: Fiszki (2025-05-07 09:08)
 
 ## 1. Current Work Focus
 
-*   Finalizing the implementation of user-facing authentication status display.
+*   Implementing user registration with email confirmation.
 *   Updating documentation (Memory Bank).
 
 ## 2. Recent Changes
 
-*   **Memory Bank Initialization:** Created initial versions of all core Memory Bank files (`projectbrief.md`, `productContext.md`, `systemPatterns.md`, `techContext.md`, `activeContext.md`, `progress.md`).
-*   **Base Template Update:** Modified `templates/base.html.twig` to include a Bootstrap navbar with conditional Login/Logout links based on `is_granted('IS_AUTHENTICATED_FULLY')`. Also added a placeholder for user identifier when logged in.
-*   **Logout Route Fix:** Uncommented the `logout()` method and `#[Route]` attribute in `src/Controller/SecurityController.php` to define the `app_logout` route, resolving a Twig rendering error.
+*   **User Registration Feature (Initial):** Implemented basic user registration with automatic login. This included:
+    *   `src/Application/User/Command/RegisterUserCommand.php` and `src/Application/User/Command/RegisterUserCommandHandler.php` for handling registration logic.
+    *   `src/Controller/SecurityController.php` with a `register` action handling form submission and command dispatch.
+    *   `templates/security/register.html.twig` for the registration form.
+    *   Added logging to the `register` action for debugging.
+    *   *Note: The automatic login part of this implementation is now superseded by the requirement for email confirmation.*
+*   **Memory Bank Initialization:** Created initial versions of all core Memory Bank files.
+*   **Base Template Update:** Modified `templates/base.html.twig` to include a Bootstrap navbar with conditional Login/Logout links.
+*   **Logout Route Fix:** Uncommented the `logout()` method and `#[Route]` attribute in `src/Controller/SecurityController.php`.
 
 ## 3. Next Steps
 
 1.  Update `progress.md` in the Memory Bank.
-2.  (Optional) Modify `src/Controller/SecurityController.php` to redirect already authenticated users away from the `/login` page (skipped for now).
-3.  Present the completed changes and the fix to the user.
-4.  User verification (running the application and checking visually).
+2.  Plan the implementation of user registration with email confirmation (token generation, storage, email sending, confirmation action).
+3.  Present the plan to the user and request to switch to ACT MODE for implementation.
+4.  Modify existing code (Controller, Command/Handler, Entity, Authenticator) to support email confirmation.
+5.  Create new components for email sending and confirmation handling.
+6.  Update memory bank documentation to reflect implemented changes.
+7.  Test the new registration and login flow.
 
 ## 4. Active Decisions & Considerations
 
-*   The Login/Logout links are now implemented in the header/navbar within `base.html.twig`.
-*   Bootstrap 5 components will be used for styling the header/navbar.
-*   The logout link will point to the `app_logout` route name, handled by the Symfony security firewall.
-*   The login link will point to the `app_login` route name.
-*   Decision pending on whether to implement the redirect for already-logged-in users visiting `/login`. (User did not explicitly confirm/deny this during planning, proceeding without it for now unless instructed otherwise).
+*   User registration logic will be modified to generate a confirmation token and send an email instead of automatically logging in the user.
+*   The `User` entity will need fields for storing the confirmation token and a flag indicating if the account is confirmed.
+*   A new controller action will be needed to handle the email confirmation link.
+*   The custom authenticator (`AppAuthenticator`) will need to be updated to prevent unconfirmed users from logging in.
+*   Email sending functionality will be required.
+*   The previous task of diagnosing a generic registration error is now on hold as the registration flow is being redesigned.

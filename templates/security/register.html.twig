@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label {
+            color: #0d6efd;
+            transform: scale(.85) translateY(-0.5rem) translateX(0.15rem);
+        }
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        }
+        .form-floating > label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            padding: 1rem 0.75rem;
+            pointer-events: none;
+            border: 1px solid transparent;
+            transform-origin: 0 0;
+            transition: opacity .1s ease-in-out,transform .1s ease-in-out;
+        }
+        .btn-primary {
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+        }
+        .card {
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                        <h3 class="mb-0 fw-bold">Rejestracja</h3>
+                    </div>
+                    <div class="card-body p-4 p-md-5">
+                        {% for flash_error in app.flashes('danger') %}
+                            <div class="alert alert-danger alert-dismissible fade show rounded-3" role="alert">
+                                {{ flash_error }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+
+                        {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                            {{ form_errors(registrationForm) }}
+
+                            <div class="form-floating mb-4">
+                                {{ form_widget(registrationForm.email, {
+                                    'attr': {
+                                        'class': 'form-control form-control-lg' ~ (registrationForm.email.vars.errors|length ? ' is-invalid' : ''),
+                                        'placeholder': 'Wprowadź adres email',
+                                        'required': 'required',
+                                        'autofocus': 'autofocus'
+                                    }
+                                }) }}
+                                {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_errors(registrationForm.email, {'attr': {'class': 'invalid-feedback'}}) }}
+                            </div>
+
+                            <div class="form-floating mb-4 position-relative">
+                                {{ form_widget(registrationForm.password, {
+                                    'attr': {
+                                        'class': 'form-control form-control-lg' ~ (registrationForm.password.vars.errors|length ? ' is-invalid' : ''),
+                                        'placeholder': 'Wprowadź hasło',
+                                        'required': 'required'
+                                    }
+                                }) }}
+                                {{ form_label(registrationForm.password, 'Hasło', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_errors(registrationForm.password, {'attr': {'class': 'invalid-feedback'}}) }}
+                                <button type="button" class="btn btn-link text-muted position-absolute end-0 top-50 translate-middle-y pe-3" onclick="togglePasswordVisibility('registration_password')">
+                                    <i class="bi bi-eye-fill" id="eye-icon-registration_password"></i>
+                                </button>
+                            </div>
+
+                            <div class="mb-4 form-check">
+                                {{ form_widget(registrationForm.agreeTerms, {
+                                    'attr': {
+                                        'class': 'form-check-input' ~ (registrationForm.agreeTerms.vars.errors|length ? ' is-invalid' : '')
+                                    }
+                                }) }}
+                                {{ form_label(registrationForm.agreeTerms, 'Akceptuję regulamin', {'label_attr': {'class': 'form-check-label'}}) }}
+                                {{ form_errors(registrationForm.agreeTerms, {'attr': {'class': 'invalid-feedback'}}) }}
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-primary btn-lg py-3 rounded-3" type="submit">
+                                            <i class="bi bi-person-plus me-2"></i>Zarejestruj się
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById('eye-icon-' + inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
+            }
+        }
+    </script>
+{% endblock %}

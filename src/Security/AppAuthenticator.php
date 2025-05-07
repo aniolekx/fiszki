@@ -68,7 +68,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             return $user;
         });
 
-        return new Passport(
+        $passport = new Passport(
             $userBadge,
             new PasswordCredentials($password),
             [
@@ -76,6 +76,14 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
                 // new RememberMeBadge(), // Uncomment if you want remember me functionality
             ]
         );
+
+        // Check if the user is confirmed
+        $user = $passport->getUser();
+        if (!$user->isConfirmed()) {
+            throw new CustomUserMessageAuthenticationException('Please confirm your email address before logging in.');
+        }
+
+        return $passport;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
