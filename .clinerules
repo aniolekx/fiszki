@@ -1,0 +1,14 @@
+{
+  "rules": [
+    "Always use PHP 8 attributes instead of annotations when working with Symfony.",
+    "Avoid using SensioFrameworkExtraBundle and similar annotation-based solutions — prefer native Symfony 6.4 attributes.",
+    "Do not use the `make:bundle` command and do not generate bundles. Follow the modern Symfony application structure (no bundles).",
+    "Manually create files in their proper directories: Controller, Entity, Repository, Service.",
+    "Use strict typing and ensure the code is fully compliant with PSR-12 coding standards.",
+    "Always use constructor-based dependency injection.",
+    "Follow modern Symfony directory conventions: no `src/Bundle`, no `Resources/views` — place views in `templates/`, controllers in `src/Controller`, etc.",
+    "Generated code must be compatible with PHP 8.2+ and Symfony 6.4 LTS.",
+    "Use Bootstrap 5 for styling all HTML components and UIs.",
+    "Prefer using Symfony UX Live Components for interactive frontend behavior instead of JavaScript-heavy solutions."
+  ]
+}
