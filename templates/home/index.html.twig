@@ -51,6 +51,9 @@
              <h2 class="mb-3">Gotowy do rozpoczęcia nauki?</h2>
              <p class="lead mb-4">Zarejestruj się dziś i podjęć pierwszy krok w kierunku opanowania nowych informacji.</p>
             <a href="#signup" class="btn btn-success btn-lg">Zacznij teraz</a>
+            {% if not app.user %}
+                <a href="{{ path('app_register') }}" class="btn btn-outline-primary btn-lg ms-2">Zarejestruj się</a>
+            {% endif %}
         </div>
     </section>
 
