@@ -81,7 +81,7 @@
                                 {{ form_errors(form.email, {'attr': {'class': 'invalid-feedback'}}) }}
                             </div>
 
-                            <div class="form-floating mb-4">
+                            <div class="form-floating mb-4 position-relative">
                                 {{ form_widget(form.password, {
                                     'attr': {
                                         'class': 'form-control form-control-lg' ~ (form.password.vars.errors|length ? ' is-invalid' : ''),
@@ -91,6 +91,9 @@
                                 }) }}
                                 {{ form_label(form.password, 'Hasło', {'label_attr': {'class': 'form-label'}}) }}
                                 {{ form_errors(form.password, {'attr': {'class': 'invalid-feedback'}}) }}
+                                <button type="button" class="btn btn-link text-muted position-absolute end-0 top-50 translate-middle-y pe-3" onclick="togglePasswordVisibility('login_password')">
+                                    <i class="bi bi-eye-fill" id="eye-icon-login_password"></i>
+                                </button>
                             </div>
 
                             <div class="row">
@@ -108,4 +111,19 @@
             </div>
         </div>
     </div>
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById('eye-icon-' + inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
+            }
+        }
+    </script>
 {% endblock %}
