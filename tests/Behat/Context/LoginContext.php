@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Context;
 
 use Behat\Behat\Context\Context;
-use Behat\MinkExtension\Context\MinkContext;
+use Behat\MinkExtension\Context\RawMinkContext;
+use Behat\Mink\Session;
 use App\Repository\DoctrineUserRepository;
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Behat\Gherkin\Node\PyStringNode;
-use Doctrine\ORM\EntityManagerInterface;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Step\Then;
+use Doctrine\ORM\EntityManagerInterface;
 
-class LoginContext extends MinkContext implements Context
+class LoginContext extends RawMinkContext implements Context
 {
     public function __construct(
         private readonly DoctrineUserRepository $userRepository,
@@ -29,8 +29,11 @@ class LoginContext extends MinkContext implements Context
      */
     public function clearDatabase(BeforeScenarioScope $scope): void
     {
-        $this->entityManager->createQuery('DELETE FROM App\Entity\User u')->execute();
-        $this->entityManager->flush();
+        $connection = $this->entityManager->getConnection();
+        $connection->executeStatement('SET FOREIGN_KEY_CHECKS = 0');
+        $connection->executeStatement('TRUNCATE TABLE users');
+        $connection->executeStatement('SET FOREIGN_KEY_CHECKS = 1');
+        $this->entityManager->clear();
     }
 
     /**
@@ -41,6 +44,9 @@ class LoginContext extends MinkContext implements Context
         $user = new User($email);
         $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         $user->setPassword($hashedPassword);
+        $user->setConfirmationToken(null);
+        $user->setIsConfirmed(true);
+        $user->setRoles(['ROLE_USER']);
         
         $this->entityManager->persist($user);
         $this->entityManager->flush();
@@ -83,7 +89,30 @@ class LoginContext extends MinkContext implements Context
      */
     public function fillField($field, $value): void
     {
-        // Note: The regex captures 'field' and 'value'. Type hinting removed for compatibility.
         $this->getSession()->getPage()->fillField("login[{$field}]", $value);
+    }
+
+    /**
+     * @When I press :button
+     */
+    public function iPress(string $button): void
+    {
+        $this->getSession()->getPage()->pressButton($button);
+    }
+
+    /**
+     * @Then I should see :text
+     */
+    public function iShouldSee(string $text): void
+    {
+        $this->assertSession()->pageTextContains($text);
+    }
+
+    /**
+     * @When I follow :link
+     */
+    public function iFollow(string $link): void
+    {
+        $this->getSession()->getPage()->clickLink($link);
     }
 }

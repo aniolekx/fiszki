@@ -14,14 +14,17 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class DeckContext extends MinkContext implements Context
+class DeckContext implements Context
 {
+    private MinkContext $minkContext;
+
     public function __construct(
         private readonly DoctrineUserRepository $userRepository,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly EntityManagerInterface $entityManager,
         private readonly KernelInterface $kernel
     ) {
+        $this->minkContext = new MinkContext();
     }
 
     /**
@@ -45,7 +48,7 @@ class DeckContext extends MinkContext implements Context
      */
     public function iFillInWith(string $field, string $value): void
     {
-        $this->getSession()->getPage()->fillField($field, $value);
+        $this->minkContext->getSession()->getPage()->fillField($field, $value);
     }
 
     /**
@@ -53,7 +56,7 @@ class DeckContext extends MinkContext implements Context
      */
     public function iPress(string $button): void
     {
-        $this->getSession()->getPage()->pressButton($button);
+        $this->minkContext->pressButton($button);
     }
 
     /**
@@ -61,7 +64,7 @@ class DeckContext extends MinkContext implements Context
      */
     public function iShouldSee(string $text): void
     {
-        $this->assertSession()->pageTextContains($text);
+        $this->minkContext->assertSession()->pageTextContains($text);
     }
 
     /**
@@ -69,7 +72,7 @@ class DeckContext extends MinkContext implements Context
      */
     public function iShouldSeeTheErrorMessage(string $message): void
     {
-        $this->assertSession()->elementTextContains('css', '.alert-danger', $message);
+        $this->minkContext->assertSession()->elementTextContains('css', '.alert-danger', $message);
     }
 
     /**
@@ -77,7 +80,7 @@ class DeckContext extends MinkContext implements Context
      */
     public function iShouldBeRedirectedToThePage(string $path): void
     {
-        $this->assertSession()->addressEquals($this->locatePath($path));
+        $this->minkContext->assertSession()->addressEquals($this->minkContext->locatePath($path));
     }
 
     /**
@@ -85,6 +88,6 @@ class DeckContext extends MinkContext implements Context
      */
     public function iShouldStillBeOnThePage(string $path): void
     {
-        $this->assertSession()->addressEquals($this->locatePath($path));
+        $this->minkContext->assertSession()->addressEquals($this->minkContext->locatePath($path));
     }
 } 

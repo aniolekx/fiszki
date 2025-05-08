@@ -1,4 +1,3 @@
-# features/user_authentication/login.feature
 Feature: User Login
   In order to access my personal flashcards and generation history
   As a registered user
