@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DeckRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -18,6 +19,7 @@ class Deck
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'This value should not be blank.')]
     private string $name = '';
 
     #[ORM\Column(type: 'text', nullable: true)]

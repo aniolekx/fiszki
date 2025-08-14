@@ -2,12 +2,18 @@
 
 {% block title %}Moje talie{% endblock %}
 
+{% block breadcrumb_items %}
+    <li class="breadcrumb-item active" aria-current="page">
+        <i class="bi bi-collection-fill"></i> Talie
+    </li>
+{% endblock %}
+
 {% block body_content %}
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Moje talie</h1>
             <a href="{{ path('deck_new') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Nowa talia
+                <i class="bi bi-plus-circle"></i> Nowa talia
             </a>
         </div>
 
@@ -42,17 +48,17 @@
                                 <td>{{ deck.createdAt|date('d.m.Y H:i') }}</td>
                                 <td>{{ deck.updatedAt|date('d.m.Y H:i') }}</td>
                                 <td class="text-end">
-                                    <div class="btn-group">
-                                        <a href="{{ path('deck_show', {'id': deck.id}) }}" class="btn btn-sm btn-outline-primary" title="Pokaż">
-                                            <i class="fas fa-eye"></i>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{{ path('deck_show', {'id': deck.id}) }}" class="btn btn-outline-primary" title="Pokaż" data-bs-toggle="tooltip">
+                                            <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{ path('deck_edit', {'id': deck.id}) }}" class="btn btn-sm btn-outline-secondary" title="Edytuj">
-                                            <i class="fas fa-edit"></i>
+                                        <a href="{{ path('deck_edit', {'id': deck.id}) }}" class="btn btn-outline-secondary" title="Edytuj" data-bs-toggle="tooltip">
+                                            <i class="bi bi-pencil"></i>
                                         </a>
                                         <form action="{{ path('deck_delete', {'id': deck.id}) }}" method="post" class="d-inline" onsubmit="return confirm('Czy na pewno chcesz usunąć tę talię?');">
                                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ deck.id) }}">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Usuń">
-                                                <i class="fas fa-trash"></i>
+                                            <button type="submit" class="btn btn-outline-danger" title="Usuń" data-bs-toggle="tooltip">
+                                                <i class="bi bi-trash"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -72,4 +78,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Bootstrap tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+    </script>
 {% endblock %}

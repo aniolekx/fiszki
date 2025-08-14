@@ -1,4 +1,13 @@
 {
+    "doctrine/deprecations": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "87424683adc81d7dc305eefec1fced883084aab9"
+        }
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.14",
         "recipe": {
@@ -39,6 +48,18 @@
             "config/services_test.yaml",
             "features/demo.feature",
             "tests/Behat/DemoContext.php"
+        ]
+    },
+    "php-http/discovery": {
+        "version": "1.20",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.18",
+            "ref": "f45b5dd173a27873ab19f5e3180b2f661c21de02"
+        },
+        "files": [
+            "config/packages/http_discovery.yaml"
         ]
     },
     "phpstan/phpstan": {

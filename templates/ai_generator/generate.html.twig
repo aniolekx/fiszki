@@ -1,0 +1,237 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Generuj fiszki z AI{% endblock %}
+
+{% block breadcrumb_items %}
+    <li class="breadcrumb-item active" aria-current="page">
+        <i class="bi bi-magic"></i> Generuj z AI
+    </li>
+{% endblock %}
+
+{% block body_content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="text-center mb-5">
+                <div class="display-1 text-primary mb-3">
+                    <i class="bi bi-magic"></i>
+                </div>
+                <h1 class="display-5 fw-bold mb-3">Generuj fiszki z AI</h1>
+                <p class="lead text-muted">Przekształć dowolny tekst edukacyjny w zestaw profesjonalnych fiszek</p>
+                
+                <div class="d-inline-flex align-items-center mt-3">
+                    <div class="badge bg-primary bg-gradient fs-6 px-3 py-2">
+                        <i class="bi bi-coin"></i> Twoje kredyty: <strong>{{ user_credits }}</strong>
+                    </div>
+                    <span class="mx-3 text-muted">|</span>
+                    <div class="badge bg-info bg-gradient fs-6 px-3 py-2">
+                        <i class="bi bi-magic"></i> Koszt generacji: <strong>{{ generation_cost }}</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                            
+                            <div class="mb-4">
+                                <label for="{{ form.text.vars.id }}" class="form-label fw-semibold">
+                                    <i class="bi bi-file-text text-primary"></i> Tekst źródłowy
+                                </label>
+                                {{ form_widget(form.text, {'attr': {'class': 'form-control form-control-lg', 'rows': 10, 'placeholder': 'Wklej tutaj tekst edukacyjny, z którego chcesz wygenerować fiszki...', 'data-character-counter': 'true'}}) }}
+                                <div class="d-flex justify-content-between mt-2">
+                                    <div class="form-text">
+                                        <i class="bi bi-info-circle"></i> Minimum 1000, maksimum 10000 znaków
+                                    </div>
+                                    <div class="form-text fw-semibold">
+                                        <span id="character-count" class="badge bg-secondary">0</span> / 10000
+                                    </div>
+                                </div>
+                                {{ form_errors(form.text) }}
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="{{ form.deck.vars.id }}" class="form-label fw-semibold">
+                                    <i class="bi bi-collection text-primary"></i> Wybierz talię
+                                </label>
+                                {{ form_widget(form.deck, {'attr': {'class': 'form-select form-select-lg'}}) }}
+                                {{ form_help(form.deck) }}
+                                {{ form_errors(form.deck) }}
+                            </div>
+                            
+                            <div class="alert alert-light border-start border-primary border-4 mb-4">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <i class="bi bi-lightbulb text-primary fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="alert-heading">Wskazówka</h6>
+                                        <p class="mb-0">Wklej fragment tekstu z podręcznika, artykułu naukowego lub notatek. AI automatycznie wyodrębni najważniejsze pojęcia i utworzy 5-10 fiszek.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                {% if can_generate %}
+                                    {{ form_widget(form.generate, {'attr': {'class': 'btn btn-primary btn-lg', 'data-loading-text': 'Generowanie...'}}) }}
+                                {% else %}
+                                    <button type="button" class="btn btn-danger btn-lg" disabled>
+                                        <i class="bi bi-x-circle"></i> Niewystarczająca liczba kredytów
+                                    </button>
+                                    <div class="alert alert-warning mt-3">
+                                        <i class="bi bi-exclamation-triangle"></i>
+                                        <strong>Brak kredytów!</strong> Potrzebujesz {{ generation_cost }} kredytów do wygenerowania fiszek.
+                                        Masz tylko {{ user_credits }} kredytów. Skontaktuj się z administratorem.
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <small class="text-muted">
+                            <i class="bi bi-shield-check text-success"></i> Twoje dane są bezpieczne i przetwarzane lokalnie
+                        </small>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-gradient bg-primary text-white">
+                            <h5 class="mb-0"><i class="bi bi-clock-history"></i> Ostatnie generacje</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            {% if recent_sessions is not empty %}
+                                <div class="list-group list-group-flush">
+                                    {% for session in recent_sessions|slice(0, 3) %}
+                                        <a href="{{ path('app_ai_review', {'id': session.id}) }}" 
+                                           class="list-group-item list-group-item-action py-3">
+                                            <div class="d-flex w-100 justify-content-between align-items-start mb-2">
+                                                <small class="text-muted">
+                                                    <i class="bi bi-calendar3"></i> {{ session.createdAt|date('d.m.Y H:i') }}
+                                                </small>
+                                                {% if session.status == 'completed' %}
+                                                    <span class="badge rounded-pill bg-success">
+                                                        <i class="bi bi-check-circle"></i> Ukończone
+                                                    </span>
+                                                {% elseif session.status == 'failed' %}
+                                                    <span class="badge rounded-pill bg-danger">
+                                                        <i class="bi bi-x-circle"></i> Błąd
+                                                    </span>
+                                                {% else %}
+                                                    <span class="badge rounded-pill bg-warning">
+                                                        <i class="bi bi-hourglass-split"></i> W trakcie
+                                                    </span>
+                                                {% endif %}
+                                            </div>
+                                            <p class="mb-1 text-truncate small">
+                                                {{ session.inputText|slice(0, 80) }}...
+                                            </p>
+                                            {% if session.generatedFlashcards is not empty %}
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-card-text text-primary me-2"></i>
+                                                    <small class="fw-semibold">{{ session.generatedFlashcards|length }} fiszek</small>
+                                                </div>
+                                            {% endif %}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                                <div class="p-3">
+                                    <a href="{{ path('app_ai_history') }}" class="btn btn-outline-primary w-100">
+                                        <i class="bi bi-list-ul"></i> Zobacz całą historię
+                                    </a>
+                                </div>
+                            {% else %}
+                                <div class="p-4 text-center">
+                                    <i class="bi bi-inbox text-muted display-4"></i>
+                                    <p class="text-muted mt-3 mb-0">Brak poprzednich generacji</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body">
+                            <h6 class="card-title fw-semibold mb-3">
+                                <i class="bi bi-question-circle text-primary"></i> Jak to działa?
+                            </h6>
+                            <ol class="small text-muted ps-3">
+                                <li class="mb-2">Wklej tekst edukacyjny (1000-10000 znaków)</li>
+                                <li class="mb-2">Wybierz talię dla nowych fiszek</li>
+                                <li class="mb-2">AI przeanalizuje tekst i wyodrębni kluczowe pojęcia</li>
+                                <li class="mb-2">Otrzymasz 5-10 gotowych fiszek do nauki</li>
+                                <li>Możesz je edytować lub od razu rozpocząć naukę</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const textarea = document.querySelector('[data-character-counter]');
+    const counter = document.getElementById('character-count');
+    const generateBtn = document.querySelector('[data-loading-text]');
+    
+    if (textarea && counter) {
+        function updateCount() {
+            const count = textarea.value.length;
+            counter.textContent = count;
+            
+            // Update badge color based on count
+            counter.classList.remove('bg-secondary', 'bg-danger', 'bg-warning', 'bg-success');
+            
+            if (count < 1000) {
+                counter.classList.add('bg-danger');
+                generateBtn.disabled = true;
+            } else if (count > 10000) {
+                counter.classList.add('bg-danger');
+                generateBtn.disabled = true;
+            } else if (count < 2000) {
+                counter.classList.add('bg-warning');
+                generateBtn.disabled = false;
+            } else {
+                counter.classList.add('bg-success');
+                generateBtn.disabled = false;
+            }
+        }
+        
+        textarea.addEventListener('input', updateCount);
+        updateCount();
+    }
+    
+    // Loading state for generate button
+    if (generateBtn) {
+        const form = generateBtn.closest('form');
+        form.addEventListener('submit', function(e) {
+            const count = textarea.value.length;
+            if (count < 1000 || count > 10000) {
+                e.preventDefault();
+                return false;
+            }
+            
+            const originalText = generateBtn.innerHTML;
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span><span>' + generateBtn.dataset.loadingText + '</span>';
+        });
+    }
+    
+    // Add animation to cards on page load
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+});
+</script>
+{% endblock %}

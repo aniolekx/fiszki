@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 #[Route('/deck')]
 class DeckController extends AbstractController
@@ -29,7 +31,14 @@ class DeckController extends AbstractController
         $deck->setUser($this->getUser());
         
         $form = $this->createFormBuilder($deck)
-            ->add('name')
+            ->add('name', TextType::class, [
+                'required' => true,
+                'empty_data' => ''
+            ])
+            ->add('description', TextareaType::class, [
+                'required' => false,
+                'empty_data' => ''
+            ])
             ->getForm();
 
         $form->handleRequest($request);
@@ -62,7 +71,14 @@ class DeckController extends AbstractController
         $this->denyAccessUnlessGranted('edit', $deck);
         
         $form = $this->createFormBuilder($deck)
-            ->add('name')
+            ->add('name', TextType::class, [
+                'required' => true,
+                'empty_data' => ''
+            ])
+            ->add('description', TextareaType::class, [
+                'required' => false,
+                'empty_data' => ''
+            ])
             ->getForm();
 
         $form->handleRequest($request);

@@ -54,6 +54,8 @@
 #mydevil
 /.htaccess
 ###> symfony/framework-bundle ###
+/.env
+/.env.test
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -82,3 +84,22 @@ phpstan.neon
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Docker volumes
+/docker/mysql/data/
+
+# Test coverage
+/coverage/
+.phpunit.result.cache
+
+# Environment example should not be ignored
+!/.env.local.example
+.idea/fiszki.iml

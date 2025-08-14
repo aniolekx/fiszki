@@ -1,0 +1,148 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Historia generowania fiszek{% endblock %}
+
+{% block body_content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Historia generowania fiszek</h1>
+        <a href="{{ path('app_ai_generate') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nowa generacja
+        </a>
+    </div>
+    
+    {% if sessions is empty %}
+        <div class="alert alert-info">
+            <h5>Brak historii</h5>
+            <p>Nie wygenerowałeś jeszcze żadnych fiszek przy pomocy AI.</p>
+            <a href="{{ path('app_ai_generate') }}" class="btn btn-primary">Wygeneruj pierwsze fiszki</a>
+        </div>
+    {% else %}
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Tekst</th>
+                                <th>Wygenerowane</th>
+                                <th>Zaakceptowane</th>
+                                <th>Talia</th>
+                                <th>Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for session in sessions %}
+                                <tr>
+                                    <td>
+                                        <small>{{ session.createdAt|date('d.m.Y H:i') }}</small>
+                                    </td>
+                                    <td>
+                                        {% if session.status == 'completed' %}
+                                            <span class="badge bg-success">Ukończone</span>
+                                        {% elseif session.status == 'failed' %}
+                                            <span class="badge bg-danger" 
+                                                  title="{{ session.errorMessage }}"
+                                                  data-bs-toggle="tooltip">
+                                                Błąd
+                                            </span>
+                                        {% elseif session.status == 'processing' %}
+                                            <span class="badge bg-warning">W trakcie</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ session.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="text-truncate" style="max-width: 300px;" 
+                                             title="{{ session.inputText }}">
+                                            {{ session.inputText|slice(0, 100) }}...
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {% if session.generatedFlashcards is not empty %}
+                                            <span class="badge bg-info">{{ session.generatedFlashcards|length }}</span>
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if session.acceptedFlashcards is not empty %}
+                                            <span class="badge bg-success">{{ session.acceptedFlashcards|length }}</span>
+                                            {% if session.acceptanceRate %}
+                                                <small class="text-muted">({{ session.acceptanceRate|number_format(0) }}%)</small>
+                                            {% endif %}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if session.deck %}
+                                            <a href="{{ path('app_deck_show', {'id': session.deck.id}) }}">
+                                                {{ session.deck.name }}
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted">-</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if session.status == 'completed' and session.generatedFlashcards is not empty %}
+                                            <a href="{{ path('app_ai_review', {'id': session.id}) }}" 
+                                               class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> Przejrzyj
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Statystyki</h5>
+                        {% set total_generated = sessions|reduce((carry, session) => carry + session.generatedFlashcards|length, 0) %}
+                        {% set total_accepted = sessions|reduce((carry, session) => carry + session.acceptedFlashcards|length, 0) %}
+                        {% set success_count = sessions|filter(s => s.status == 'completed')|length %}
+                        
+                        <p class="mb-2">
+                            <strong>Sesje generowania:</strong> {{ sessions|length }}
+                        </p>
+                        <p class="mb-2">
+                            <strong>Udane generacje:</strong> {{ success_count }}
+                        </p>
+                        <p class="mb-2">
+                            <strong>Wygenerowane fiszki:</strong> {{ total_generated }}
+                        </p>
+                        <p class="mb-2">
+                            <strong>Zaakceptowane fiszki:</strong> {{ total_accepted }}
+                        </p>
+                        {% if total_generated > 0 %}
+                            <p class="mb-0">
+                                <strong>Współczynnik akceptacji:</strong> 
+                                {{ ((total_accepted / total_generated) * 100)|number_format(1) }}%
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+</script>
+{% endblock %}

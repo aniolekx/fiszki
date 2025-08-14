@@ -1,0 +1,195 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Nauka - {{ flashcard.deck.name }}{% endblock %}
+
+{% block breadcrumb_items %}
+    <li class="breadcrumb-item"><a href="{{ path('app_study_index') }}">Sesja nauki</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('deck_show', {'id': flashcard.deck.id}) }}">{{ flashcard.deck.name }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Fiszka {{ currentCard }} z {{ totalCards }}</li>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .flashcard {
+            min-height: 300px;
+            cursor: pointer;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            min-height: 300px;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border-radius: 0.5rem;
+        }
+        
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+        
+        .quality-button {
+            min-width: 100px;
+            margin: 0.25rem;
+        }
+        
+        .progress-bar-container {
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+{% block body_content %>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="mb-3">
+                <h2>{{ flashcard.deck.name }}</h2>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: {{ ((currentCard - 1) / totalCards * 100)|round }}%">
+                        {{ currentCard }} / {{ totalCards }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-lg">
+                <div class="flashcard" id="flashcard">
+                    <div class="flashcard-front card-body d-flex flex-column align-items-center justify-content-center bg-primary text-white">
+                        <h5 class="text-center mb-3">Pytanie</h5>
+                        <div class="h3 text-center">{{ flashcard.front }}</div>
+                        <div class="mt-4">
+                            <small class="text-white-50">Kliknij, aby zobaczyć odpowiedź</small>
+                        </div>
+                    </div>
+                    
+                    <div class="flashcard-back card-body d-flex flex-column align-items-center justify-content-center bg-success text-white">
+                        <h5 class="text-center mb-3">Odpowiedź</h5>
+                        <div class="h3 text-center">{{ flashcard.back }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rating-section" class="mt-4" style="display: none;">
+                <h5 class="text-center mb-3">Jak dobrze znasz tę fiszkę?</h5>
+                <div class="row justify-content-center">
+                    {% for quality, description in qualityDescriptions %}
+                        <div class="col-6 col-md-4 mb-2">
+                            <button class="btn btn-outline-{{ quality < 3 ? 'danger' : (quality == 3 ? 'warning' : 'success') }} quality-button w-100" 
+                                    data-quality="{{ quality }}"
+                                    title="{{ description }}">
+                                {{ quality }}<br>
+                                <small>{{ description|slice(0, 20) }}...</small>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <div class="row">
+                    <div class="col-6">
+                        <a href="{{ path('app_study_index') }}" class="btn btn-outline-secondary w-100">
+                            <i class="bi bi-x-circle"></i> Zakończ sesję
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <button id="show-answer-btn" class="btn btn-primary w-100">
+                            <i class="bi bi-eye"></i> Pokaż odpowiedź
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {% if progress.repetitions > 0 %}
+                <div class="mt-4">
+                    <small class="text-muted">
+                        Statystyki: Powtórzenia: {{ progress.repetitions }}, 
+                        Poprawność: {{ progress.accuracy }}%, 
+                        Następna powtórka za: {{ progress.interval }} dni
+                    </small>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const flashcard = document.getElementById('flashcard');
+    const showAnswerBtn = document.getElementById('show-answer-btn');
+    const ratingSection = document.getElementById('rating-section');
+    const qualityButtons = document.querySelectorAll('.quality-button');
+    let isFlipped = false;
+
+    function flipCard() {
+        if (!isFlipped) {
+            flashcard.classList.add('flipped');
+            isFlipped = true;
+            showAnswerBtn.style.display = 'none';
+            setTimeout(() => {
+                ratingSection.style.display = 'block';
+            }, 300);
+        }
+    }
+
+    flashcard.addEventListener('click', flipCard);
+    showAnswerBtn.addEventListener('click', flipCard);
+
+    qualityButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const quality = this.dataset.quality;
+            
+            // Disable all buttons
+            qualityButtons.forEach(btn => btn.disabled = true);
+            
+            // Send answer to server
+            fetch('{{ path('app_study_answer') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'quality=' + quality
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.nextUrl;
+                } else {
+                    alert('Wystąpił błąd. Spróbuj ponownie.');
+                    qualityButtons.forEach(btn => btn.disabled = false);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Wystąpił błąd. Spróbuj ponownie.');
+                qualityButtons.forEach(btn => btn.disabled = false);
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

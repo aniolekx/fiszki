@@ -1,0 +1,171 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Przejrzyj wygenerowane fiszki{% endblock %}
+
+{% block body_content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Przejrzyj wygenerowane fiszki</h1>
+    
+    {% if session.status == 'failed' %}
+        <div class="alert alert-danger">
+            <h5>Błąd generowania</h5>
+            <p>{{ session.errorMessage }}</p>
+            <a href="{{ path('app_ai_generate') }}" class="btn btn-primary">Spróbuj ponownie</a>
+        </div>
+    {% elseif flashcards is empty %}
+        <div class="alert alert-warning">
+            <h5>Brak fiszek</h5>
+            <p>Nie udało się wygenerować żadnych fiszek z podanego tekstu.</p>
+            <a href="{{ path('app_ai_generate') }}" class="btn btn-primary">Spróbuj ponownie</a>
+        </div>
+    {% else %}
+        <div class="alert alert-success mb-4">
+            <i class="bi bi-check-circle"></i>
+            Wygenerowano <strong>{{ flashcards|length }}</strong> fiszek. 
+            Przejrzyj je, edytuj jeśli potrzeba i wybierz te, które chcesz zapisać.
+        </div>
+        
+        <form method="post" id="review-form">
+            <div class="row mb-3">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-primary" id="select-all">
+                        <i class="bi bi-check-square"></i> Zaznacz wszystkie
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" id="deselect-all">
+                        <i class="bi bi-square"></i> Odznacz wszystkie
+                    </button>
+                </div>
+            </div>
+            
+            <div class="row g-3">
+                {% for index, flashcard in flashcards %}
+                    <div class="col-md-6">
+                        <div class="card h-100 flashcard-card">
+                            <div class="card-header">
+                                <div class="form-check">
+                                    <input class="form-check-input flashcard-checkbox" 
+                                           type="checkbox" 
+                                           name="flashcards[]" 
+                                           value="{{ index }}" 
+                                           id="flashcard-{{ index }}"
+                                           checked>
+                                    <label class="form-check-label" for="flashcard-{{ index }}">
+                                        Fiszka #{{ index + 1 }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Przód (pytanie):</label>
+                                    <textarea class="form-control" 
+                                              name="front_{{ index }}" 
+                                              rows="3">{{ flashcard.front }}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Tył (odpowiedź):</label>
+                                    <textarea class="form-control" 
+                                              name="back_{{ index }}" 
+                                              rows="3">{{ flashcard.back }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ path('app_ai_generate') }}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Wróć
+                        </a>
+                        <div>
+                            <span class="me-3">
+                                Wybrano: <strong id="selected-count">{{ flashcards|length }}</strong> z {{ flashcards|length }}
+                            </span>
+                            <button type="submit" name="action" value="save" class="btn btn-success btn-lg">
+                                <i class="bi bi-save"></i> Zapisz wybrane fiszki
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        {% if session.deck %}
+            <div class="alert alert-info mt-3">
+                <i class="bi bi-info-circle"></i>
+                Fiszki zostaną dodane do talii: <strong>{{ session.deck.name }}</strong>
+            </div>
+        {% else %}
+            <div class="alert alert-info mt-3">
+                <i class="bi bi-info-circle"></i>
+                Zostanie utworzona nowa talia dla tych fiszek.
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+
+<style>
+.flashcard-card {
+    transition: all 0.3s ease;
+}
+
+.flashcard-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.flashcard-card .form-check-input:not(:checked) ~ .form-check-label {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.flashcard-card:has(.form-check-input:not(:checked)) {
+    opacity: 0.7;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('.flashcard-checkbox');
+    const selectAllBtn = document.getElementById('select-all');
+    const deselectAllBtn = document.getElementById('deselect-all');
+    const selectedCount = document.getElementById('selected-count');
+    
+    function updateCount() {
+        const checked = document.querySelectorAll('.flashcard-checkbox:checked').length;
+        selectedCount.textContent = checked;
+    }
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateCount);
+    });
+    
+    if (selectAllBtn) {
+        selectAllBtn.addEventListener('click', function() {
+            checkboxes.forEach(checkbox => checkbox.checked = true);
+            updateCount();
+        });
+    }
+    
+    if (deselectAllBtn) {
+        deselectAllBtn.addEventListener('click', function() {
+            checkboxes.forEach(checkbox => checkbox.checked = false);
+            updateCount();
+        });
+    }
+    
+    // Enable editing only when flashcard is selected
+    checkboxes.forEach(checkbox => {
+        const card = checkbox.closest('.card');
+        const textareas = card.querySelectorAll('textarea');
+        
+        checkbox.addEventListener('change', function() {
+            textareas.forEach(textarea => {
+                textarea.disabled = !checkbox.checked;
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

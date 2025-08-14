@@ -1,0 +1,278 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Panel Administracyjny{% endblock %}
+
+{% block breadcrumb_items %}
+    <li class="breadcrumb-item active" aria-current="page">
+        <i class="bi bi-shield-lock-fill"></i> Panel Administracyjny
+    </li>
+{% endblock %}
+
+{% block body_content %}
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2 mb-1">
+                <i class="bi bi-shield-lock-fill text-danger"></i> Panel Administracyjny
+            </h1>
+            <p class="text-muted mb-0">Zarządzaj systemem i użytkownikami</p>
+        </div>
+        <div class="btn-group" role="group">
+            <a href="{{ path('app_admin_users') }}" class="btn btn-outline-primary">
+                <i class="bi bi-people"></i> Użytkownicy
+            </a>
+            <a href="{{ path('app_admin_settings') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-gear"></i> Ustawienia
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-primary bg-gradient rounded-circle p-3">
+                                <i class="bi bi-people-fill text-white fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h3 class="mb-0">{{ stats.total_users }}</h3>
+                            <p class="text-muted mb-0">Użytkowników</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-success bg-gradient rounded-circle p-3">
+                                <i class="bi bi-coin text-white fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h3 class="mb-0">{{ stats.total_credits|number_format(0, ',', ' ') }}</h3>
+                            <p class="text-muted mb-0">Kredytów w systemie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-info bg-gradient rounded-circle p-3">
+                                <i class="bi bi-cpu text-white fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h3 class="mb-0">{{ stats.total_tokens|number_format(0, ',', ' ') }}</h3>
+                            <p class="text-muted mb-0">Tokenów użytych</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-warning bg-gradient rounded-circle p-3">
+                                <i class="bi bi-currency-dollar text-white fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h3 class="mb-0">${{ stats.estimated_cost|number_format(2, '.', ',') }}</h3>
+                            <p class="text-muted mb-0">Szacowany koszt</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">Statystyki kredytów</h6>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Średnia na użytkownika</span>
+                            <strong>{{ stats.average_credits|round }}</strong>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Przyznane przez admina</span>
+                            <strong class="text-success">+{{ stats.credits_granted }}</strong>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Wydane na AI</span>
+                            <strong class="text-danger">-{{ stats.credits_spent_ai }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">Ustawienia systemu</h6>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Kredyty dla nowych</span>
+                            <strong>{{ settings.default_credits }}</strong>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Koszt generacji AI</span>
+                            <strong>{{ settings.ai_generation_cost }}</strong>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ path('app_admin_settings') }}" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-gear"></i> Zmień ustawienia
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">Użycie tokenów</h6>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Ten miesiąc</span>
+                            <strong>{{ stats.monthly_tokens|number_format(0, ',', ' ') }}</strong>
+                        </div>
+                    </div>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-info" role="progressbar" 
+                             style="width: {{ (stats.monthly_tokens / 1000000 * 100)|round }}%"
+                             aria-valuenow="{{ stats.monthly_tokens }}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="1000000">
+                        </div>
+                    </div>
+                    <small class="text-muted">Limit: 1,000,000 tokenów/miesiąc</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pt-4 pb-3">
+                    <h5 class="mb-0">
+                        <i class="bi bi-clock-history"></i> Ostatnie transakcje kredytów
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if recent_transactions|length > 0 %}
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Użytkownik</th>
+                                        <th>Typ</th>
+                                        <th class="text-end">Kwota</th>
+                                        <th>Data</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for transaction in recent_transactions %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path('app_admin_user_show', {'id': transaction.user.id}) }}">
+                                                    {{ transaction.user.email|slice(0, 20) }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {% if transaction.type == 'initial' %}
+                                                    <span class="badge bg-primary">Początkowe</span>
+                                                {% elseif transaction.type == 'admin_grant' %}
+                                                    <span class="badge bg-success">Admin</span>
+                                                {% elseif transaction.type == 'ai_generation' %}
+                                                    <span class="badge bg-info">AI</span>
+                                                {% else %}
+                                                    <span class="badge bg-secondary">{{ transaction.type }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-end">
+                                                {% if transaction.amount > 0 %}
+                                                    <span class="text-success">+{{ transaction.amount }}</span>
+                                                {% else %}
+                                                    <span class="text-danger">{{ transaction.amount }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <small>{{ transaction.createdAt|date('d.m H:i') }}</small>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted text-center">Brak transakcji</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pt-4 pb-3">
+                    <h5 class="mb-0">
+                        <i class="bi bi-exclamation-triangle text-warning"></i> Użytkownicy z niskim stanem kredytów
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if low_credit_users|length > 0 %}
+                        <div class="list-group list-group-flush">
+                            {% for userCredit in low_credit_users %}
+                                <div class="list-group-item px-0">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <a href="{{ path('app_admin_user_show', {'id': userCredit.user.id}) }}">
+                                                {{ userCredit.user.email }}
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <span class="badge bg-danger">{{ userCredit.balance }} kredytów</span>
+                                            <a href="{{ path('app_admin_user_show', {'id': userCredit.user.id}) }}" 
+                                               class="btn btn-sm btn-outline-success ms-2">
+                                                <i class="bi bi-plus-circle"></i> Doładuj
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted text-center">Wszyscy użytkownicy mają wystarczająco kredytów</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

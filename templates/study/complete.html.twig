@@ -1,0 +1,88 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Sesja zakończona - Fiszki{% endblock %}
+
+{% block breadcrumb_items %}
+    <li class="breadcrumb-item"><a href="{{ path('app_study_index') }}">Sesja nauki</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Sesja zakończona</li>
+{% endblock %}
+
+{% block body_content %>
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-lg">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-trophy text-warning" style="font-size: 4rem;"></i>
+                    <h2 class="mt-3 mb-4">Gratulacje!</h2>
+                    <p class="lead">Ukończyłeś sesję nauki!</p>
+                    
+                    {% if session %}
+                        <div class="mt-4">
+                            <h4>Podsumowanie sesji</h4>
+                            <div class="row mt-3">
+                                <div class="col-4">
+                                    <div class="text-muted">Talia</div>
+                                    <div class="h5">{{ session.deck.name }}</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-muted">Przejrzane</div>
+                                    <div class="h5">{{ session.reviewedCards }}/{{ session.totalCards }}</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-muted">Poprawne</div>
+                                    <div class="h5">{{ session.correctAnswers }}</div>
+                                </div>
+                            </div>
+                            
+                            {% if session.reviewedCards > 0 %}
+                                <div class="mt-4">
+                                    <div class="text-muted">Skuteczność</div>
+                                    <div class="progress mt-2" style="height: 30px;">
+                                        <div class="progress-bar bg-{{ session.accuracy >= 80 ? 'success' : (session.accuracy >= 60 ? 'warning' : 'danger') }}" 
+                                             role="progressbar" 
+                                             style="width: {{ session.accuracy }}%"
+                                             aria-valuenow="{{ session.accuracy }}" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100">
+                                            {{ session.accuracy }}%
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            <div class="mt-4">
+                                <small class="text-muted">
+                                    Czas trwania: 
+                                    {% set duration = session.completedAt|date('U') - session.startedAt|date('U') %}
+                                    {% if duration < 60 %}
+                                        {{ duration }} sekund
+                                    {% elseif duration < 3600 %}
+                                        {{ (duration / 60)|round }} minut
+                                    {% else %}
+                                        {{ (duration / 3600)|round(1) }} godzin
+                                    {% endif %}
+                                </small>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="mt-5">
+                        <a href="{{ path('app_study_index') }}" class="btn btn-primary btn-lg">
+                            <i class="bi bi-arrow-repeat"></i> Kontynuuj naukę
+                        </a>
+                        <a href="{{ path('app_dashboard') }}" class="btn btn-outline-secondary btn-lg ms-2">
+                            <i class="bi bi-house"></i> Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="text-muted">
+                    <i class="bi bi-lightbulb"></i> 
+                    Wskazówka: Regularna nauka z użyciem spaced repetition znacznie poprawia zapamiętywanie!
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

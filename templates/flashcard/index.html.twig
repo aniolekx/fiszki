@@ -2,12 +2,18 @@
 
 {% block title %}Moje fiszki{% endblock %}
 
+{% block breadcrumb_items %}
+    <li class="breadcrumb-item active" aria-current="page">
+        <i class="bi bi-card-text"></i> Fiszki
+    </li>
+{% endblock %}
+
 {% block body_content %}
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Moje fiszki</h1>
             <a href="{{ path('flashcard_new') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Nowa fiszka
+                <i class="bi bi-plus-circle"></i> Nowa fiszka
             </a>
         </div>
 
@@ -28,17 +34,17 @@
                                 <td>{{ flashcard.front }}</td>
                                 <td>{{ flashcard.back }}</td>
                                 <td class="text-end">
-                                    <div class="btn-group">
-                                        <a href="{{ path('flashcard_show', {'id': flashcard.id}) }}" class="btn btn-sm btn-outline-primary" title="Pokaż">
-                                            <i class="fas fa-eye"></i>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{{ path('flashcard_show', {'id': flashcard.id}) }}" class="btn btn-outline-primary" title="Pokaż" data-bs-toggle="tooltip">
+                                            <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{ path('flashcard_edit', {'id': flashcard.id}) }}" class="btn btn-sm btn-outline-secondary" title="Edytuj">
-                                            <i class="fas fa-edit"></i>
+                                        <a href="{{ path('flashcard_edit', {'id': flashcard.id}) }}" class="btn btn-outline-secondary" title="Edytuj" data-bs-toggle="tooltip">
+                                            <i class="bi bi-pencil"></i>
                                         </a>
                                         <form action="{{ path('flashcard_delete', {'id': flashcard.id}) }}" method="post" class="d-inline" onsubmit="return confirm('Czy na pewno chcesz usunąć tę fiszkę?');">
                                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ flashcard.id) }}">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Usuń">
-                                                <i class="fas fa-trash"></i>
+                                            <button type="submit" class="btn btn-outline-danger" title="Usuń" data-bs-toggle="tooltip">
+                                                <i class="bi bi-trash"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -58,4 +64,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Bootstrap tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+    </script>
 {% endblock %}

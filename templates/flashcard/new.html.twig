@@ -1,21 +1,39 @@
 {% extends 'base_with_nav.html.twig' %}
 
-{% block title %}New Flashcard{% endblock %}
+{% block title %}Nowa fiszka{% endblock %}
 
-{% block body %}
+{% block body_content %}
     <div class="container mt-4">
-        <h1 class="mb-4">Create New Flashcard</h1>
-
-        {{ form_start(form) }}
-            <div class="mb-3">
-                {{ form_row(form.front) }}
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="h3 mb-0">Utwórz nową fiszkę</h1>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form) }}
+                            <div class="mb-3">
+                                {{ form_label(form.front, 'Przód (pytanie)') }}
+                                {{ form_widget(form.front, {'attr': {'class': 'form-control', 'placeholder': 'Wprowadź pytanie...'}}) }}
+                                {{ form_errors(form.front) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.back, 'Tył (odpowiedź)') }}
+                                {{ form_widget(form.back, {'attr': {'class': 'form-control', 'placeholder': 'Wprowadź odpowiedź...'}}) }}
+                                {{ form_errors(form.back) }}
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ path('flashcard_index') }}" class="btn btn-secondary">
+                                    <i class="bi bi-arrow-left"></i> Powrót do listy
+                                </a>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-plus-circle"></i> Utwórz fiszkę
+                                </button>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                {{ form_row(form.back) }}
-            </div>
-            <button type="submit" class="btn btn-success">Create</button>
-        {{ form_end(form) }}
-
-        <a href="{{ path('flashcard_index') }}" class="btn btn-secondary mt-3">Back to list</a>
+        </div>
     </div>
 {% endblock %}

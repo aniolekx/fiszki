@@ -16,6 +16,9 @@ framework:
     #fragments: true
     php_errors:
         log: true
+    
+    # IDE configuration for PHPStorm with Docker path mapping
+    ide: 'phpstorm://open?file=%%f&line=%%l&/var/www/html/>/Users/krzysztofkrakowiak/Desktop/cursor/fiszki/'
 
 when@test:
     framework:

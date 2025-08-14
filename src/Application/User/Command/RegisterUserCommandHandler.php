@@ -6,6 +6,7 @@ namespace App\Application\User\Command;
 
 use App\Entity\User;
 use App\Repository\DoctrineUserRepository;
+use App\Service\CreditService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,7 +21,8 @@ final readonly class RegisterUserCommandHandler
         private UserPasswordHasherInterface $passwordHasher,
         private EntityManagerInterface $entityManager,
         private DoctrineUserRepository $userRepository, // Assuming you have a UserRepository
-        private MessageBusInterface $messageBus
+        private MessageBusInterface $messageBus,
+        private CreditService $creditService
     ) {
     }
 
@@ -49,6 +51,9 @@ final readonly class RegisterUserCommandHandler
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+        
+        // Inicjalizuj kredyty dla nowego użytkownika
+        $this->creditService->initializeUserCredits($user);
 
         $this->messageBus->dispatch(new SendConfirmationEmailCommand($user->getEmail(), $confirmationToken));
     }

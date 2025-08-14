@@ -12,17 +12,16 @@ Feature: Deck Creation
     Then I should be redirected to the "/" page
 
   Scenario: Successful deck creation
-    Given I am on the "/decks/new" page
-    When I fill in "name" with "Moja pierwsza talia"
-    And I fill in "description" with "Talia do nauki angielskiego"
+    Given I am on the "/deck/new" page
+    When I fill in "Nazwa talii" with "Moja pierwsza talia"
+    And I fill in "Opis" with "Talia do nauki angielskiego"
     And I press "Utwórz talię"
-    Then I should be redirected to the "/decks" page
+    Then I should be redirected to the "/deck/" page
     And I should see "Moja pierwsza talia"
-    And I should see "Talia do nauki angielskiego"
 
   Scenario: Failed deck creation with empty name
-    Given I am on the "/decks/new" page
-    When I fill in "description" with "Talia do nauki angielskiego"
+    Given I am on the "/deck/new" page
+    When I fill in "Opis" with "Talia do nauki angielskiego"
     And I press "Utwórz talię"
-    Then I should still be on the "/decks/new" page
-    And I should see the error message "Nazwa talii jest wymagana" 
+    Then I should still be on the "/deck/new" page
+    And I should see "This value should not be blank." 

@@ -1,4 +1,4 @@
-{% extends 'base_with_minimal_nav.html.twig' %}
+{% extends 'base_with_nav.html.twig' %}
 
 {% block title %}Rejestracja{% endblock %}
 
@@ -6,11 +6,6 @@
     {{ parent() }}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
         .form-floating > .form-control:focus ~ label,
         .form-floating > .form-control:not(:placeholder-shown) ~ label {
             color: #0d6efd;
@@ -38,6 +33,13 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
         }
+        .btn-success {
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-success:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(25, 135, 84, 0.2);
+        }
         .card {
             transition: all 0.3s ease-in-out;
         }
@@ -51,9 +53,9 @@
 {% block body_content %}
     <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-8 col-lg-6">
                 <div class="card shadow-lg border-0 rounded-4">
-                    <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                    <div class="card-header bg-success text-white text-center py-4 rounded-top-4">
                         <h3 class="mb-0 fw-bold">Rejestracja</h3>
                     </div>
                     <div class="card-body p-4 p-md-5">
@@ -108,7 +110,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-primary btn-lg py-3 rounded-3" type="submit">
+                                        <button class="btn btn-success btn-lg py-3 rounded-3" type="submit">
                                             <i class="bi bi-person-plus me-2"></i>Zarejestruj się
                                         </button>
                                     </div>

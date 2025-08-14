@@ -1,0 +1,162 @@
+{% extends 'base_with_nav.html.twig' %}
+
+{% block title %}Historia sesji nauki - Fiszki{% endblock %}
+
+{% block breadcrumb_items %}
+    <li class="breadcrumb-item"><a href="{{ path('app_study_index') }}">Sesja nauki</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Historia</li>
+{% endblock %}
+
+{% block body_content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Historia sesji nauki</h1>
+        <a href="{{ path('app_study_index') }}" class="btn btn-primary">
+            <i class="bi bi-play-fill"></i> Rozpocznij naukę
+        </a>
+    </div>
+
+    {% if sessions is empty %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Brak historii</h4>
+            <p>Nie masz jeszcze żadnych ukończonych sesji nauki.</p>
+            <hr>
+            <a href="{{ path('app_study_index') }}" class="btn btn-primary">Rozpocznij swoją pierwszą sesję</a>
+        </div>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Data rozpoczęcia</th>
+                        <th>Talia</th>
+                        <th>Czas trwania</th>
+                        <th>Przejrzane fiszki</th>
+                        <th>Poprawne odpowiedzi</th>
+                        <th>Skuteczność</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for session in sessions %}
+                        <tr>
+                            <td>{{ session.startedAt|date('Y-m-d H:i:s') }}</td>
+                            <td>
+                                <strong>{{ session.deck.name }}</strong>
+                                {% if session.deck.description %}
+                                    <br><small class="text-muted">{{ session.deck.description|slice(0, 50) }}...</small>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if session.completedAt %}
+                                    {% set duration = session.completedAt|date('U') - session.startedAt|date('U') %}
+                                    {% if duration < 60 %}
+                                        {{ duration }} s
+                                    {% elseif duration < 3600 %}
+                                        {{ (duration / 60)|round }} min
+                                    {% else %}
+                                        {{ (duration / 3600)|round(1) }} h
+                                    {% endif %}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge bg-info">{{ session.reviewedCards }}/{{ session.totalCards }}</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-success">{{ session.correctAnswers }}</span>
+                            </td>
+                            <td>
+                                {% if session.reviewedCards > 0 %}
+                                    {% set accuracy = session.accuracy %}
+                                    <div class="progress" style="min-width: 100px; height: 20px;">
+                                        <div class="progress-bar bg-{{ accuracy >= 80 ? 'success' : (accuracy >= 60 ? 'warning' : 'danger') }}" 
+                                             role="progressbar" 
+                                             style="width: {{ accuracy }}%"
+                                             aria-valuenow="{{ accuracy }}" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100">
+                                            {{ accuracy }}%
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if session.status == 'completed' %}
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-check-circle"></i> Ukończona
+                                    </span>
+                                {% elseif session.status == 'in_progress' %}
+                                    <span class="badge bg-warning text-dark">
+                                        <i class="bi bi-hourglass-split"></i> W trakcie
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary">
+                                        <i class="bi bi-x-circle"></i> Porzucona
+                                    </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if sessions|length >= 20 %}
+            <div class="alert alert-info mt-3">
+                <i class="bi bi-info-circle"></i> Wyświetlono ostatnie 20 sesji nauki.
+            </div>
+        {% endif %}
+
+        <div class="mt-4">
+            <h3>Statystyki ogólne</h3>
+            {% set totalSessions = sessions|length %}
+            {% set completedSessions = sessions|filter(s => s.status == 'completed')|length %}
+            {% set totalReviewed = sessions|reduce((sum, s) => sum + s.reviewedCards, 0) %}
+            {% set totalCorrect = sessions|reduce((sum, s) => sum + s.correctAnswers, 0) %}
+            
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Wszystkie sesje</h5>
+                            <p class="card-text display-6">{{ totalSessions }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Ukończone</h5>
+                            <p class="card-text display-6 text-success">{{ completedSessions }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Przejrzane fiszki</h5>
+                            <p class="card-text display-6 text-info">{{ totalReviewed }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Średnia skuteczność</h5>
+                            <p class="card-text display-6 text-primary">
+                                {% if totalReviewed > 0 %}
+                                    {{ ((totalCorrect / totalReviewed) * 100)|round }}%
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

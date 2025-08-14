@@ -4,6 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    open_ai_key: '%env(OPEN_AI_KEY)%'
+    ai_model: '%env(AI_MODEL)%'
+    ai_temperature: '%env(float:AI_TEMPERATURE)%'
+    ai_max_tokens: '%env(int:AI_MAX_TOKENS)%'
 
 services:
     # default configuration for services in *this* file
@@ -19,4 +23,13 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    
+    # Alias for the enhanced AI service
+    App\Service\AIFlashcardServiceEnhanced:
+        arguments:
+            $params: '@parameter_bag'
+            $logger: '@logger'
+            $entityManager: '@doctrine.orm.entity_manager'
+            $settingsRepository: '@App\Repository\SystemSettingsRepository'
+            $aiUsageRepository: '@App\Repository\AIUsageLogRepository'
 

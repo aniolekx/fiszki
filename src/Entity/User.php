@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: DoctrineUserRepository::class)]
 #[ORM\Table(name: 'users')]
@@ -24,6 +25,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Deck::class, orphanRemoval: true)]
     private Collection $decks;
+    
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: UserCredits::class, cascade: ['persist', 'remove'])]
+    private ?UserCredits $credits = null;
+    
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column]
     private ?string $password = null;
@@ -40,6 +47,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct(string $email)
     {
         $this->email = $email;
+        $this->decks = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -105,5 +114,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->email;
+    }
+    
+    public function getCredits(): ?UserCredits
+    {
+        return $this->credits;
+    }
+    
+    public function setCredits(UserCredits $credits): self
+    {
+        $this->credits = $credits;
+        if ($credits->getUser() !== $this) {
+            $credits->setUser($this);
+        }
+        return $this;
+    }
+    
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->roles, true);
+    }
+    
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+    
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
     }
 }
