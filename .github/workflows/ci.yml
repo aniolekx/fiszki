@@ -107,7 +107,7 @@ jobs:
         run: vendor/bin/behat --format=progress --no-interaction
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         if: success()
         with:
           files: ./coverage.xml
