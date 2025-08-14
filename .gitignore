@@ -99,6 +99,10 @@ yarn-error.log
 # Test coverage
 /coverage/
 .phpunit.result.cache
+coverage.xml
+
+# PHP CS Fixer
+.php-cs-fixer.cache
 
 # Environment example should not be ignored
 !/.env.local.example
