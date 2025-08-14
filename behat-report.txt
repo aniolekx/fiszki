@@ -1,0 +1,173 @@
+----------------------.......................-U-----U--------U------U- 70
+-------U------U------U------U-----U------U---
+
+--- Failed hooks:
+
+    BeforeScenario "tests/Behat/features/login.feature:9" # App\Tests\Behat\Context\LoginContext::clearDatabase()
+      An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+
+    BeforeScenario "tests/Behat/features/login.feature:18" # App\Tests\Behat\Context\LoginContext::clearDatabase()
+      An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+
+    BeforeScenario "tests/Behat/features/login.feature:26" # App\Tests\Behat\Context\LoginContext::clearDatabase()
+      An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+
+    BeforeScenario "tests/Behat/features/study_session.feature:15" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+      An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+
+    BeforeScenario "tests/Behat/features/study_session.feature:25" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+      An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+
+    BeforeScenario "tests/Behat/features/study_session.feature:36" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+      An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+
+    BeforeScenario "tests/Behat/features/study_session.feature:45" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+      An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+
+    BeforeScenario "tests/Behat/features/study_session.feature:53" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+      An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+
+10 scenarios (2 passed, 5 undefined, 3 skipped)
+115 steps (23 passed, 10 undefined, 82 skipped)
+0m0.45s (39.32Mb)
+ should see the error message "The presented password is invalid." # App\Tests\Behat\Context\LoginContext::iShouldSeeTheErrorMessage()
+
+  ┌─ @BeforeScenario # App\Tests\Behat\Context\LoginContext::clearDatabase()
+  │
+  ╳  An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+  │
+  Scenario: Failed login with non-existent email                          # tests/Behat/features/login.feature:26
+    Given I am on the "/login" page                                       # App\Tests\Behat\Context\LoginContext::iAmOnThePage()
+    When I fill in the login field "email" with "nonexistent@example.com" # App\Tests\Behat\Context\LoginContext::fillField()
+    And I fill in the login field "password" with "anyPassword"           # App\Tests\Behat\Context\LoginContext::fillField()
+    And I press "Zaloguj się"                                             # App\Tests\Behat\Context\LoginContext::iPress()
+    Then I should still be on the "/login" page                           # App\Tests\Behat\Context\LoginContext::iShouldStillBeOnThePage()
+    And I should see the error message "Email could not be found."        # App\Tests\Behat\Context\LoginContext::iShouldSeeTheErrorMessage()
+
+Feature: Deck Creation
+  In order to organize my flashcards
+  As a logged in user
+  I want to be able to create new decks
+
+  Background:                                                                          # tests/Behat/features/deck.feature:6
+    Given a user exists with email "aniolekx@gmail.com" and password "correctPassword" # App\Tests\Behat\Context\DeckContext::aUserExistsWithEmailAndPassword()
+    And I am on the "/login" page                                                      # App\Tests\Behat\Context\DeckContext::iAmOnThePage()
+    When I fill in the login field "email" with "aniolekx@gmail.com"                   # App\Tests\Behat\Context\DeckContext::iFillInTheLoginFieldWith()
+    And I fill in the login field "password" with "correctPassword"                    # App\Tests\Behat\Context\DeckContext::iFillInTheLoginFieldWith()
+    And I press "Zaloguj się"                                                          # App\Tests\Behat\Context\DeckContext::iPress()
+    Then I should be redirected to the "/" page                                        # App\Tests\Behat\Context\DeckContext::iShouldBeRedirectedToThePage()
+
+  Scenario: Successful deck creation                        # tests/Behat/features/deck.feature:14
+    Given I am on the "/deck/new" page                      # App\Tests\Behat\Context\DeckContext::iAmOnThePage()
+    When I fill in "Nazwa talii" with "Moja pierwsza talia" # App\Tests\Behat\Context\DeckContext::iFillInWith()
+    And I fill in "Opis" with "Talia do nauki angielskiego" # App\Tests\Behat\Context\DeckContext::iFillInWith()
+    And I press "Utwórz talię"                              # App\Tests\Behat\Context\DeckContext::iPress()
+    Then I should be redirected to the "/deck/" page        # App\Tests\Behat\Context\DeckContext::iShouldBeRedirectedToThePage()
+    And I should see "Moja pierwsza talia"                  # App\Tests\Behat\Context\DeckContext::iShouldSee()
+
+  Scenario: Failed deck creation with empty name             # tests/Behat/features/deck.feature:22
+    Given I am on the "/deck/new" page                       # App\Tests\Behat\Context\DeckContext::iAmOnThePage()
+    When I fill in "Opis" with "Talia do nauki angielskiego" # App\Tests\Behat\Context\DeckContext::iFillInWith()
+    And I press "Utwórz talię"                               # App\Tests\Behat\Context\DeckContext::iPress()
+    Then I should still be on the "/deck/new" page           # App\Tests\Behat\Context\DeckContext::iShouldStillBeOnThePage()
+    And I should see "This value should not be blank."       # App\Tests\Behat\Context\DeckContext::iShouldSee()
+
+Feature: Study Session
+  In order to learn effectively with spaced repetition
+  As a logged in user
+  I want to be able to study my flashcards
+
+  Background:                                                                        # tests/Behat/features/study_session.feature:6
+    Given a user exists with email "student@example.com" and password "StudyPass123" # App\Tests\Behat\Context\StudySessionContext::aUserExistsWithEmailAndPassword()
+    And I am on the "/login" page
+    When I fill in the login field "email" with "student@example.com"                # App\Tests\Behat\Context\StudySessionContext::iFillInTheLoginFieldWith()
+    And I fill in the login field "password" with "StudyPass123"                     # App\Tests\Behat\Context\StudySessionContext::iFillInTheLoginFieldWith()
+    And I press "Zaloguj się"                                                        # App\Tests\Behat\Context\StudySessionContext::pressButton()
+    Then I should be redirected to the "/" page                                      # App\Tests\Behat\Context\StudySessionContext::iShouldBeRedirectedToThePage()
+    And there is a deck named "Biology Deck" with 3 flashcards                       # App\Tests\Behat\Context\StudySessionContext::thereIsADeckNamedWithFlashcards()
+
+  ┌─ @BeforeScenario # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+  │
+  ╳  An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+  │
+  Scenario: Starting a study session                      # tests/Behat/features/study_session.feature:15
+    Given I am on the "/study/" page
+    Then I should see "Sesja nauki"                       # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see "Biology Deck"                       # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see "Wszystkie fiszki: 3"                # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    When I click "Rozpocznij naukę"                       # App\Tests\Behat\Context\StudySessionContext::iClick()
+    Then I should be redirected to the "/study/card" page # App\Tests\Behat\Context\StudySessionContext::iShouldBeRedirectedToThePage()
+    And I should see "Pytanie"                            # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see "1 / 3"                              # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+
+  ┌─ @BeforeScenario # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+  │
+  ╳  An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+  │
+  Scenario: Reviewing a flashcard                           # tests/Behat/features/study_session.feature:25
+    Given I have started a study session for "Biology Deck" # App\Tests\Behat\Context\StudySessionContext::iHaveStartedAStudySessionFor()
+    When I am on the "/study/card" page
+    Then I should see "Pytanie"                             # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see "Kliknij, aby zobaczyć odpowiedź"      # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    When I click the flashcard                              # App\Tests\Behat\Context\StudySessionContext::iClickTheFlashcard()
+    Then I should see "Odpowiedź"                           # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see "Jak dobrze znasz tę fiszkę?"          # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    When I rate the card with quality "4"                   # App\Tests\Behat\Context\StudySessionContext::iRateTheCardWithQuality()
+    Then I should be redirected to the next card            # App\Tests\Behat\Context\StudySessionContext::iShouldBeRedirectedToTheNextCard()
+
+  ┌─ @BeforeScenario # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+  │
+  ╳  An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+  │
+  Scenario: Completing a study session                  # tests/Behat/features/study_session.feature:36
+    Given I have reviewed all cards in my study session # App\Tests\Behat\Context\StudySessionContext::iHaveReviewedAllCardsInMyStudySession()
+    When I am on the "/study/complete" page
+    Then I should see "Gratulacje!"                     # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see "Ukończyłeś sesję nauki!"          # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see "Skuteczność"                      # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see a "Kontynuuj naukę" button         # App\Tests\Behat\Context\StudySessionContext::iShouldSeeAButton()
+    And I should see a "Dashboard" button               # App\Tests\Behat\Context\StudySessionContext::iShouldSeeAButton()
+
+  ┌─ @BeforeScenario # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+  │
+  ╳  An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+  │
+  Scenario: Viewing study history                    # tests/Behat/features/study_session.feature:45
+    Given I have completed 2 study sessions          # App\Tests\Behat\Context\StudySessionContext::iHaveCompletedStudySessions()
+    When I am on the "/study/history" page
+    Then I should see "Historia sesji nauki"         # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see 2 sessions in the history table # App\Tests\Behat\Context\StudySessionContext::iShouldSeeSessionsInTheHistoryTable()
+    And I should see "Statystyki ogólne"             # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+    And I should see "Wszystkie sesje: 2"            # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+
+  ┌─ @BeforeScenario # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+  │
+  ╳  An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fiszki.users' doesn't exist (Doctrine\DBAL\Exception\TableNotFoundException)
+  │
+  Scenario: No cards due for review                                     # tests/Behat/features/study_session.feature:53
+    Given all my flashcards are scheduled for tomorrow                  # App\Tests\Behat\Context\StudySessionContext::allMyFlashcardsAreScheduledForTomorrow()
+    When I am on the "/study/" page
+    And I click "Rozpocznij naukę" for "Biology Deck"                   # App\Tests\Behat\Context\StudySessionContext::iClickForDeck()
+    Then I should be redirected to the "/study/" page                   # App\Tests\Behat\Context\StudySessionContext::iShouldBeRedirectedToThePage()
+    And I should see "Nie masz żadnych fiszek do powtórki w tej talii!" # App\Tests\Behat\Context\StudySessionContext::assertPageContainsText()
+
+--- Failed hooks:
+
+    BeforeScenario "tests/Behat/features/login.feature:9" # App\Tests\Behat\Context\LoginContext::clearDatabase()
+    BeforeScenario "tests/Behat/features/login.feature:18" # App\Tests\Behat\Context\LoginContext::clearDatabase()
+    BeforeScenario "tests/Behat/features/login.feature:26" # App\Tests\Behat\Context\LoginContext::clearDatabase()
+    BeforeScenario "tests/Behat/features/study_session.feature:15" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+    BeforeScenario "tests/Behat/features/study_session.feature:25" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+    BeforeScenario "tests/Behat/features/study_session.feature:36" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+    BeforeScenario "tests/Behat/features/study_session.feature:45" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+    BeforeScenario "tests/Behat/features/study_session.feature:53" # App\Tests\Behat\Context\StudySessionContext::cleanDatabase()
+
+--- Skipped scenarios:
+
+    tests/Behat/features/login.feature:9
+    tests/Behat/features/login.feature:18
+    tests/Behat/features/login.feature:26
+
+10 scenarios (2 passed, 5 undefined, 3 skipped)
+115 steps (23 passed, 10 undefined, 82 skipped)
+0m0.45s (39.32Mb)

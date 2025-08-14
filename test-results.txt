@@ -1,0 +1,2024 @@
+PHPUnit 10.5.46 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.4
+Configuration: /var/www/html/phpunit.dist.xml
+
+FF[error] OpenAI API error
+[error] OpenAI generation failed
+FF[error] OpenAI API error
+[error] OpenAI generation failed
+FFEE..F...[error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException: "Access Denied by #[IsGranted("ROLE_ADMIN")] on controller" at ExceptionListener.php line 136
+..F.F.FFEEEEEEEEEE..FF.[error] Registration Error: Handling "App\Application\User\Command\RegisterUserCommand" failed: Handling "App\Application\User\Command\SendConfirmationEmailCommand" failed: Expected response code "250/251/252" but got code "550", with message "550 Unknown recipient".
+FEEEEEEEEEEEEEEEE.........  63 / 149 ( 42%)
+............................................................... 126 / 149 ( 84%)
+FEF....................                                         149 / 149 (100%)
+
+Time: 00:50.278, Memory: 52.50 MB
+
+AIFlashcard Service Enhanced (App\Tests\Unit\Service\AIFlashcardServiceEnhanced)
+ ✔ Throws exception when api key not configured
+ ✔ Check monthly limit throws exception when exceeded
+ ✔ Check monthly limit warns when approaching
+ ✔ Estimate cost calculates correctly
+ ✔ Validates text length
+ ✘ Open a i exception from a p i errors
+   │
+   │ Failed asserting that two strings are equal.
+   │ --- Expected
+   │ +++ Actual
+   │ @@ @@
+   │ -'network'
+   │ +'timeout'
+   │
+   │ /var/www/html/tests/Unit/Service/AIFlashcardServiceEnhancedTest.php:215
+   │
+ ✘ Retry mechanism for temporary errors
+   │
+   │ Error: Call to undefined method PHPUnit\Framework\MockObject\Builder\InvocationMocker::withConsecutive()
+   │
+   │ /var/www/html/tests/Unit/Service/AIFlashcardServiceEnhancedTest.php:238
+   │
+ ✘ Logs usage successfully
+   │
+   │ Expectation failed for method name is "info" when invoked 1 time.
+   │ Method was expected to be called 1 time, actually called 0 times.
+
+   │
+
+AIGenerator Error Handling (App\Tests\Functional\Controller\AIGeneratorErrorHandling)
+ ✘ Handles rate limit error
+   │
+   │ Failed asserting that Symfony\Component\HttpFoundation\RedirectResponse Object #3817 (
+   │     'headers' => Symfony\Component\HttpFoundation\ResponseHeaderBag Object #3826 (
+   │         'headers' => Array &0 [
+   │             'cache-control' => Array &1 [
+   │                 0 => 'max-age=0, must-revalidate, private',
+   │             ],
+   │             'date' => Array &2 [
+   │                 0 => 'Thu, 14 Aug 2025 09:51:50 GMT',
+   │             ],
+   │             'location' => Array &3 [
+   │                 0 => '/ai/review/10',
+   │             ],
+   │             'content-type' => Array &4 [
+   │                 0 => 'text/html; charset=utf-8',
+   │             ],
+   │             'x-robots-tag' => Array &5 [
+   │                 0 => 'noindex',
+   │             ],
+   │             'expires' => Array &6 [
+   │                 0 => 'Thu, 14 Aug 2025 09:51:50 GMT',
+   │             ],
+   │         ],
+   │         'cacheControl' => Array &7 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'computedCacheControl' => Array &8 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'cookies' => Array &9 [],
+   │         'headerNames' => Array &10 [
+   │             'cache-control' => 'Cache-Control',
+   │             'date' => 'Date',
+   │             'location' => 'Location',
+   │             'content-type' => 'Content-Type',
+   │             'x-robots-tag' => 'X-Robots-Tag',
+   │             'expires' => 'Expires',
+   │         ],
+   │     ),
+   │     'content' => '<!DOCTYPE html>\n
+   │ <html>\n
+   │     <head>\n
+   │         <meta charset="UTF-8" />\n
+   │         <meta http-equiv="refresh" content="0;url='/ai/review/10'" />\n
+   │ \n
+   │         <title>Redirecting to /ai/review/10</title>\n
+   │     </head>\n
+   │     <body>\n
+   │         Redirecting to <a href="/ai/review/10">/ai/review/10</a>.\n
+   │     </body>\n
+   │ </html>',
+   │     'version' => '1.1',
+   │     'statusCode' => 302,
+   │     'statusText' => 'Found',
+   │     'charset' => 'UTF-8',
+   │     'targetUrl' => '/ai/review/10',
+   │ ) is redirected and has header "Location" matching "/ai/generate".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:148
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:62
+   │ /var/www/html/tests/Functional/Controller/AIGeneratorErrorHandlingTest.php:119
+   │
+ ✘ Handles insufficient quota error
+   │
+   │ Failed asserting that Symfony\Component\HttpFoundation\RedirectResponse Object #1814 (
+   │     'headers' => Symfony\Component\HttpFoundation\ResponseHeaderBag Object #2072 (
+   │         'headers' => Array &0 [
+   │             'cache-control' => Array &1 [
+   │                 0 => 'max-age=0, must-revalidate, private',
+   │             ],
+   │             'date' => Array &2 [
+   │                 0 => 'Thu, 14 Aug 2025 09:51:56 GMT',
+   │             ],
+   │             'location' => Array &3 [
+   │                 0 => '/ai/review/11',
+   │             ],
+   │             'content-type' => Array &4 [
+   │                 0 => 'text/html; charset=utf-8',
+   │             ],
+   │             'x-robots-tag' => Array &5 [
+   │                 0 => 'noindex',
+   │             ],
+   │             'expires' => Array &6 [
+   │                 0 => 'Thu, 14 Aug 2025 09:51:56 GMT',
+   │             ],
+   │         ],
+   │         'cacheControl' => Array &7 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'computedCacheControl' => Array &8 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'cookies' => Array &9 [],
+   │         'headerNames' => Array &10 [
+   │             'cache-control' => 'Cache-Control',
+   │             'date' => 'Date',
+   │             'location' => 'Location',
+   │             'content-type' => 'Content-Type',
+   │             'x-robots-tag' => 'X-Robots-Tag',
+   │             'expires' => 'Expires',
+   │         ],
+   │     ),
+   │     'content' => '<!DOCTYPE html>\n
+   │ <html>\n
+   │     <head>\n
+   │         <meta charset="UTF-8" />\n
+   │         <meta http-equiv="refresh" content="0;url='/ai/review/11'" />\n
+   │ \n
+   │         <title>Redirecting to /ai/review/11</title>\n
+   │     </head>\n
+   │     <body>\n
+   │         Redirecting to <a href="/ai/review/11">/ai/review/11</a>.\n
+   │     </body>\n
+   │ </html>',
+   │     'version' => '1.1',
+   │     'statusCode' => 302,
+   │     'statusText' => 'Found',
+   │     'charset' => 'UTF-8',
+   │     'targetUrl' => '/ai/review/11',
+   │ ) is redirected and has header "Location" matching "/ai/generate".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:148
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:62
+   │ /var/www/html/tests/Functional/Controller/AIGeneratorErrorHandlingTest.php:164
+   │
+ ✘ Handles service unavailable
+   │
+   │ Failed asserting that Symfony\Component\HttpFoundation\Response Object #5449 (
+   │     'headers' => Symfony\Component\HttpFoundation\ResponseHeaderBag Object #5453 (
+   │         'headers' => Array &0 [
+   │             'cache-control' => Array &1 [
+   │                 0 => 'max-age=0, must-revalidate, private',
+   │             ],
+   │             'date' => Array &2 [
+   │                 0 => 'Thu, 14 Aug 2025 09:52:03 GMT',
+   │             ],
+   │             'content-type' => Array &3 [
+   │                 0 => 'text/html; charset=UTF-8',
+   │             ],
+   │             'x-robots-tag' => Array &4 [
+   │                 0 => 'noindex',
+   │             ],
+   │             'expires' => Array &5 [
+   │                 0 => 'Thu, 14 Aug 2025 09:52:03 GMT',
+   │             ],
+   │         ],
+   │         'cacheControl' => Array &6 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'computedCacheControl' => Array &7 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'cookies' => Array &8 [],
+   │         'headerNames' => Array &9 [
+   │             'cache-control' => 'Cache-Control',
+   │             'date' => 'Date',
+   │             'content-type' => 'Content-Type',
+   │             'x-robots-tag' => 'X-Robots-Tag',
+   │             'expires' => 'Expires',
+   │         ],
+   │     ),
+   │     'content' => '<!DOCTYPE html>\n
+   │ <html>\n
+   │     <head>\n
+   │         <meta charset="UTF-8">\n
+   │         <title>Generuj fiszki z AI</title>\n
+   │         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">\n
+   │                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">\n
+   │             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">\n
+   │         \n
+   │                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>\n
+   │ \n
+   │             </head>\n
+   │     <body>\n
+   │         <div class="container">\n
+   │                 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">\n
+   │         <div class="container-fluid">\n
+   │             <a class="navbar-brand" href="/">Fiszki App</a>\n
+   │             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n
+   │                 <span class="navbar-toggler-icon"></span>\n
+   │             </button>\n
+   │             <div class="collapse navbar-collapse" id="navbarNav">\n
+   │                 <ul class="navbar-nav me-auto">\n
+   │                                             <li class="nav-item">\n
+   │                             <a class="nav-link" href="/dashboard/">Dashboard</a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/deck/">Talie</a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/flashcard/">Fiszki</a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/ai/generate">\n
+   │                                 <i class="bi bi-magic"></i> Generuj z AI\n
+   │                             </a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/study/">\n
+   │                                 <i class="bi bi-mortarboard"></i> Sesja nauki\n
+   │                             </a>\n
+   │                         </li>\n
+   │                                                             </ul>\n
+   │                 <ul class="navbar-nav ms-auto">\n
+   │                                             <li class="nav-item">\n
+   │                             <span class="navbar-text me-3">\n
+   │                                 Witaj, user@test.com!\n
+   │                             </span>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="btn btn-outline-danger" href="/logout">Wyloguj</a>\n
+   │                         </li>\n
+   │                                     </ul>\n
+   │             </div>\n
+   │         </div>\n
+   │     </nav>\n
+   │ \n
+   │     <div class="container">\n
+   │                                     <nav aria-label="breadcrumb" class="mt-3 mb-4">\n
+   │                     <ol class="breadcrumb bg-white border px-3 py-2 rounded-3 shadow-sm">\n
+   │                         <li class="breadcrumb-item">\n
+   │                             <a href="/" class="text-decoration-none text-primary">\n
+   │                                 <i class="bi bi-house-door"></i> Strona główna\n
+   │                             </a>\n
+   │                         </li>\n
+   │                             <li class="breadcrumb-item active" aria-current="page">\n
+   │         <i class="bi bi-magic"></i> Generuj z AI\n
+   │     </li>\n
+   │                     </ol>\n
+   │                 </nav>\n
+   │                             \n
+   │             <div class="row justify-content-center">\n
+   │         <div class="col-lg-10">\n
+   │             <div class="text-center mb-5">\n
+   │                 <div class="display-1 text-primary mb-3">\n
+   │                     <i class="bi bi-magic"></i>\n
+   │                 </div>\n
+   │                 <h1 class="display-5 fw-bold mb-3">Generuj fiszki z AI</h1>\n
+   │                 <p class="lead text-muted">Przekształć dowolny tekst edukacyjny w zestaw profesjonalnych fiszek</p>\n
+   │                 \n
+   │                 <div class="d-inline-flex align-items-center mt-3">\n
+   │                     <div class="badge bg-primary bg-gradient fs-6 px-3 py-2">\n
+   │                         <i class="bi bi-coin"></i> Twoje kredyty: <strong>500</strong>\n
+   │                     </div>\n
+   │                     <span class="mx-3 text-muted">|</span>\n
+   │                     <div class="badge bg-info bg-gradient fs-6 px-3 py-2">\n
+   │                         <i class="bi bi-magic"></i> Koszt generacji: <strong>100</strong>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │             \n
+   │             <div class="row g-4">\n
+   │                 <div class="col-lg-8">\n
+   │                     <div class="card shadow-sm border-0">\n
+   │                         <div class="card-body p-4">\n
+   │                             <form name="ai_generate" method="post" class="needs-validation" novalidate="novalidate">\n
+   │                             \n
+   │                             <div class="mb-4">\n
+   │                                 <label for="ai_generate_text" class="form-label fw-semibold">\n
+   │                                     <i class="bi bi-file-text text-primary"></i> Tekst źródłowy\n
+   │                                 </label>\n
+   │                                 <textarea id="ai_generate_text" name="ai_generate[text]" required="required" rows="10" placeholder="Wklej tutaj tekst edukacyjny, z którego chcesz wygenerować fiszki..." class="form-control form-control-lg" data-character-counter="true" maxlength="10000">Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content</textarea>\n
+   │                                 <div class="d-flex justify-content-between mt-2">\n
+   │                                     <div class="form-text">\n
+   │                                         <i class="bi bi-info-circle"></i> Minimum 1000, maksimum 10000 znaków\n
+   │                                     </div>\n
+   │                                     <div class="form-text fw-semibold">\n
+   │                                         <span id="character-count" class="badge bg-secondary">0</span> / 10000\n
+   │                                     </div>\n
+   │                                 </div>\n
+   │                                 \n
+   │                             </div>\n
+   │                             \n
+   │                             <div class="mb-4">\n
+   │                                 <label for="ai_generate_deck" class="form-label fw-semibold">\n
+   │                                     <i class="bi bi-collection text-primary"></i> Wybierz talię\n
+   │                                 </label>\n
+   │                                 <select id="ai_generate_deck" name="ai_generate[deck]" class="form-select form-select-lg"><option value="">-- Utwórz nową talię --</option><option value="17" selected="selected">Test Deck</option></select>\n
+   │                                 <div id="ai_generate_deck_help" class="help-text">Wybierz talię, do której zostaną dodane fiszki, lub zostaw puste aby utworzyć nową</div>\n
+   │                                 \n
+   │                             </div>\n
+   │                             \n
+   │                             <div class="alert alert-light border-start border-primary border-4 mb-4">\n
+   │                                 <div class="d-flex">\n
+   │                                     <div class="me-3">\n
+   │                                         <i class="bi bi-lightbulb text-primary fs-4"></i>\n
+   │                                     </div>\n
+   │                                     <div>\n
+   │                                         <h6 class="alert-heading">Wskazówka</h6>\n
+   │                                         <p class="mb-0">Wklej fragment tekstu z podręcznika, artykułu naukowego lub notatek. AI automatycznie wyodrębni najważniejsze pojęcia i utworzy 5-10 fiszek.</p>\n
+   │                                     </div>\n
+   │                                 </div>\n
+   │                             </div>\n
+   │                             \n
+   │                             <div class="d-grid">\n
+   │                                                                     <button type="submit" id="ai_generate_generate" name="ai_generate[generate]" class="btn btn-primary btn-lg" data-loading-text="Generowanie...">Generuj fiszki</button>\n
+   │                                                             </div>\n
+   │                             \n
+   │                             <input type="hidden" id="ai_generate__token" name="ai_generate[_token]" value="ac93427574d8b40fd56212e30f7.-t3UXNBfySA_TpzTm6AGFYXKyyiMvO_A5i-a44QhcNk.vrSkMoYx-RBFKfu6r-V0Tc6elF3I1omWoFjQ0dZuBb7XqbA6pi2fDXQW7w" /></form>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                     \n
+   │                     <div class="text-center mt-4">\n
+   │                         <small class="text-muted">\n
+   │                             <i class="bi bi-shield-check text-success"></i> Twoje dane są bezpieczne i przetwarzane lokalnie\n
+   │                         </small>\n
+   │                     </div>\n
+   │                 </div>\n
+   │                 \n
+   │                 <div class="col-lg-4">\n
+   │                     <div class="card shadow-sm border-0 mb-4">\n
+   │                         <div class="card-header bg-gradient bg-primary text-white">\n
+   │                             <h5 class="mb-0"><i class="bi bi-clock-history"></i> Ostatnie generacje</h5>\n
+   │                         </div>\n
+   │                         <div class="card-body p-0">\n
+   │                                                             <div class="list-group list-group-flush">\n
+   │                                                                             <a href="/ai/review/12" \n
+   │                                            class="list-group-item list-group-item-action py-3">\n
+   │                                             <div class="d-flex w-100 justify-content-between align-items-start mb-2">\n
+   │                                                 <small class="text-muted">\n
+   │                                                     <i class="bi bi-calendar3"></i> 14.08.2025 09:51\n
+   │                                                 </small>\n
+   │                                                                                                     <span class="badge rounded-pill bg-danger">\n
+   │                                                         <i class="bi bi-x-circle"></i> Błąd\n
+   │                                                     </span>\n
+   │                                                                                             </div>\n
+   │                                             <p class="mb-1 text-truncate small">\n
+   │                                                 Test content Test content Test content Test content Test content Test content Te...\n
+   │                                             </p>\n
+   │                                                                                     </a>\n
+   │                                                                     </div>\n
+   │                                 <div class="p-3">\n
+   │                                     <a href="/ai/history" class="btn btn-outline-primary w-100">\n
+   │                                         <i class="bi bi-list-ul"></i> Zobacz całą historię\n
+   │                                     </a>\n
+   │                                 </div>\n
+   │                                                     </div>\n
+   │                     </div>\n
+   │                     \n
+   │                     <div class="card shadow-sm border-0">\n
+   │                         <div class="card-body">\n
+   │                             <h6 class="card-title fw-semibold mb-3">\n
+   │                                 <i class="bi bi-question-circle text-primary"></i> Jak to działa?\n
+   │                             </h6>\n
+   │                             <ol class="small text-muted ps-3">\n
+   │                                 <li class="mb-2">Wklej tekst edukacyjny (1000-10000 znaków)</li>\n
+   │                                 <li class="mb-2">Wybierz talię dla nowych fiszek</li>\n
+   │                                 <li class="mb-2">AI przeanalizuje tekst i wyodrębni kluczowe pojęcia</li>\n
+   │                                 <li class="mb-2">Otrzymasz 5-10 gotowych fiszek do nauki</li>\n
+   │                                 <li>Możesz je edytować lub od razu rozpocząć naukę</li>\n
+   │                             </ol>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │     </div>\n
+   │ \n
+   │ <script>\n
+   │ document.addEventListener('DOMContentLoaded', function() {\n
+   │     const textarea = document.querySelector('[data-character-counter]');\n
+   │     const counter = document.getElementById('character-count');\n
+   │     const generateBtn = document.querySelector('[data-loading-text]');\n
+   │     \n
+   │     if (textarea && counter) {\n
+   │         function updateCount() {\n
+   │             const count = textarea.value.length;\n
+   │             counter.textContent = count;\n
+   │             \n
+   │             // Update badge color based on count\n
+   │             counter.classList.remove('bg-secondary', 'bg-danger', 'bg-warning', 'bg-success');\n
+   │             \n
+   │             if (count < 1000) {\n
+   │                 counter.classList.add('bg-danger');\n
+   │                 generateBtn.disabled = true;\n
+   │             } else if (count > 10000) {\n
+   │                 counter.classList.add('bg-danger');\n
+   │                 generateBtn.disabled = true;\n
+   │             } else if (count < 2000) {\n
+   │                 counter.classList.add('bg-warning');\n
+   │                 generateBtn.disabled = false;\n
+   │             } else {\n
+   │                 counter.classList.add('bg-success');\n
+   │                 generateBtn.disabled = false;\n
+   │             }\n
+   │         }\n
+   │         \n
+   │         textarea.addEventListener('input', updateCount);\n
+   │         updateCount();\n
+   │     }\n
+   │     \n
+   │     // Loading state for generate button\n
+   │     if (generateBtn) {\n
+   │         const form = generateBtn.closest('form');\n
+   │         form.addEventListener('submit', function(e) {\n
+   │             const count = textarea.value.length;\n
+   │             if (count < 1000 || count > 10000) {\n
+   │                 e.preventDefault();\n
+   │                 return false;\n
+   │             }\n
+   │             \n
+   │             const originalText = generateBtn.innerHTML;\n
+   │             generateBtn.disabled = true;\n
+   │             generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span><span>' + generateBtn.dataset.loadingText + '</span>';\n
+   │         });\n
+   │     }\n
+   │     \n
+   │     // Add animation to cards on page load\n
+   │     const cards = document.querySelectorAll('.card');\n
+   │     cards.forEach((card, index) => {\n
+   │         card.style.opacity = '0';\n
+   │         card.style.transform = 'translateY(20px)';\n
+   │         setTimeout(() => {\n
+   │             card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';\n
+   │             card.style.opacity = '1';\n
+   │             card.style.transform = 'translateY(0)';\n
+   │         }, index * 100);\n
+   │     });\n
+   │ });\n
+   │ </script>\n
+   │     </div>\n
+   │         </div>\n
+   │     </body>\n
+   │ </html>\n
+   │ ',
+   │     'version' => '1.1',
+   │     'statusCode' => 200,
+   │     'statusText' => 'OK',
+   │     'charset' => 'UTF-8',
+   │ ) is redirected and has header "Location" matching "/ai/generate".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:148
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:62
+   │ /var/www/html/tests/Functional/Controller/AIGeneratorErrorHandlingTest.php:197
+   │
+ ✘ Handles monthly limit exceeded
+   │
+   │ Failed asserting that Symfony\Component\HttpFoundation\RedirectResponse Object #2127 (
+   │     'headers' => Symfony\Component\HttpFoundation\ResponseHeaderBag Object #4981 (
+   │         'headers' => Array &0 [
+   │             'cache-control' => Array &1 [
+   │                 0 => 'max-age=0, must-revalidate, private',
+   │             ],
+   │             'date' => Array &2 [
+   │                 0 => 'Thu, 14 Aug 2025 09:52:13 GMT',
+   │             ],
+   │             'location' => Array &3 [
+   │                 0 => '/ai/review/13',
+   │             ],
+   │             'content-type' => Array &4 [
+   │                 0 => 'text/html; charset=utf-8',
+   │             ],
+   │             'x-robots-tag' => Array &5 [
+   │                 0 => 'noindex',
+   │             ],
+   │             'expires' => Array &6 [
+   │                 0 => 'Thu, 14 Aug 2025 09:52:13 GMT',
+   │             ],
+   │         ],
+   │         'cacheControl' => Array &7 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'computedCacheControl' => Array &8 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'cookies' => Array &9 [],
+   │         'headerNames' => Array &10 [
+   │             'cache-control' => 'Cache-Control',
+   │             'date' => 'Date',
+   │             'location' => 'Location',
+   │             'content-type' => 'Content-Type',
+   │             'x-robots-tag' => 'X-Robots-Tag',
+   │             'expires' => 'Expires',
+   │         ],
+   │     ),
+   │     'content' => '<!DOCTYPE html>\n
+   │ <html>\n
+   │     <head>\n
+   │         <meta charset="UTF-8" />\n
+   │         <meta http-equiv="refresh" content="0;url='/ai/review/13'" />\n
+   │ \n
+   │         <title>Redirecting to /ai/review/13</title>\n
+   │     </head>\n
+   │     <body>\n
+   │         Redirecting to <a href="/ai/review/13">/ai/review/13</a>.\n
+   │     </body>\n
+   │ </html>',
+   │     'version' => '1.1',
+   │     'statusCode' => 302,
+   │     'statusText' => 'Found',
+   │     'charset' => 'UTF-8',
+   │     'targetUrl' => '/ai/review/13',
+   │ ) is redirected and has header "Location" matching "/ai/generate".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:148
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:62
+   │ /var/www/html/tests/Functional/Controller/AIGeneratorErrorHandlingTest.php:236
+   │
+ ✘ Handles timeout error
+   │
+   │ Failed asserting that Symfony\Component\HttpFoundation\Response Object #4060 (
+   │     'headers' => Symfony\Component\HttpFoundation\ResponseHeaderBag Object #4056 (
+   │         'headers' => Array &0 [
+   │             'cache-control' => Array &1 [
+   │                 0 => 'max-age=0, must-revalidate, private',
+   │             ],
+   │             'date' => Array &2 [
+   │                 0 => 'Thu, 14 Aug 2025 09:52:23 GMT',
+   │             ],
+   │             'content-type' => Array &3 [
+   │                 0 => 'text/html; charset=UTF-8',
+   │             ],
+   │             'x-robots-tag' => Array &4 [
+   │                 0 => 'noindex',
+   │             ],
+   │             'expires' => Array &5 [
+   │                 0 => 'Thu, 14 Aug 2025 09:52:23 GMT',
+   │             ],
+   │         ],
+   │         'cacheControl' => Array &6 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'computedCacheControl' => Array &7 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'cookies' => Array &8 [],
+   │         'headerNames' => Array &9 [
+   │             'cache-control' => 'Cache-Control',
+   │             'date' => 'Date',
+   │             'content-type' => 'Content-Type',
+   │             'x-robots-tag' => 'X-Robots-Tag',
+   │             'expires' => 'Expires',
+   │         ],
+   │     ),
+   │     'content' => '<!DOCTYPE html>\n
+   │ <html>\n
+   │     <head>\n
+   │         <meta charset="UTF-8">\n
+   │         <title>Generuj fiszki z AI</title>\n
+   │         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">\n
+   │                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">\n
+   │             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">\n
+   │         \n
+   │                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>\n
+   │ \n
+   │             </head>\n
+   │     <body>\n
+   │         <div class="container">\n
+   │                 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">\n
+   │         <div class="container-fluid">\n
+   │             <a class="navbar-brand" href="/">Fiszki App</a>\n
+   │             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n
+   │                 <span class="navbar-toggler-icon"></span>\n
+   │             </button>\n
+   │             <div class="collapse navbar-collapse" id="navbarNav">\n
+   │                 <ul class="navbar-nav me-auto">\n
+   │                                             <li class="nav-item">\n
+   │                             <a class="nav-link" href="/dashboard/">Dashboard</a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/deck/">Talie</a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/flashcard/">Fiszki</a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/ai/generate">\n
+   │                                 <i class="bi bi-magic"></i> Generuj z AI\n
+   │                             </a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/study/">\n
+   │                                 <i class="bi bi-mortarboard"></i> Sesja nauki\n
+   │                             </a>\n
+   │                         </li>\n
+   │                                                             </ul>\n
+   │                 <ul class="navbar-nav ms-auto">\n
+   │                                             <li class="nav-item">\n
+   │                             <span class="navbar-text me-3">\n
+   │                                 Witaj, user@test.com!\n
+   │                             </span>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="btn btn-outline-danger" href="/logout">Wyloguj</a>\n
+   │                         </li>\n
+   │                                     </ul>\n
+   │             </div>\n
+   │         </div>\n
+   │     </nav>\n
+   │ \n
+   │     <div class="container">\n
+   │                                     <nav aria-label="breadcrumb" class="mt-3 mb-4">\n
+   │                     <ol class="breadcrumb bg-white border px-3 py-2 rounded-3 shadow-sm">\n
+   │                         <li class="breadcrumb-item">\n
+   │                             <a href="/" class="text-decoration-none text-primary">\n
+   │                                 <i class="bi bi-house-door"></i> Strona główna\n
+   │                             </a>\n
+   │                         </li>\n
+   │                             <li class="breadcrumb-item active" aria-current="page">\n
+   │         <i class="bi bi-magic"></i> Generuj z AI\n
+   │     </li>\n
+   │                     </ol>\n
+   │                 </nav>\n
+   │                             \n
+   │             <div class="row justify-content-center">\n
+   │         <div class="col-lg-10">\n
+   │             <div class="text-center mb-5">\n
+   │                 <div class="display-1 text-primary mb-3">\n
+   │                     <i class="bi bi-magic"></i>\n
+   │                 </div>\n
+   │                 <h1 class="display-5 fw-bold mb-3">Generuj fiszki z AI</h1>\n
+   │                 <p class="lead text-muted">Przekształć dowolny tekst edukacyjny w zestaw profesjonalnych fiszek</p>\n
+   │                 \n
+   │                 <div class="d-inline-flex align-items-center mt-3">\n
+   │                     <div class="badge bg-primary bg-gradient fs-6 px-3 py-2">\n
+   │                         <i class="bi bi-coin"></i> Twoje kredyty: <strong>500</strong>\n
+   │                     </div>\n
+   │                     <span class="mx-3 text-muted">|</span>\n
+   │                     <div class="badge bg-info bg-gradient fs-6 px-3 py-2">\n
+   │                         <i class="bi bi-magic"></i> Koszt generacji: <strong>100</strong>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │             \n
+   │             <div class="row g-4">\n
+   │                 <div class="col-lg-8">\n
+   │                     <div class="card shadow-sm border-0">\n
+   │                         <div class="card-body p-4">\n
+   │                             <form name="ai_generate" method="post" class="needs-validation" novalidate="novalidate">\n
+   │                             \n
+   │                             <div class="mb-4">\n
+   │                                 <label for="ai_generate_text" class="form-label fw-semibold">\n
+   │                                     <i class="bi bi-file-text text-primary"></i> Tekst źródłowy\n
+   │                                 </label>\n
+   │                                 <textarea id="ai_generate_text" name="ai_generate[text]" required="required" rows="10" placeholder="Wklej tutaj tekst edukacyjny, z którego chcesz wygenerować fiszki..." class="form-control form-control-lg" data-character-counter="true" maxlength="10000">Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content Test content</textarea>\n
+   │                                 <div class="d-flex justify-content-between mt-2">\n
+   │                                     <div class="form-text">\n
+   │                                         <i class="bi bi-info-circle"></i> Minimum 1000, maksimum 10000 znaków\n
+   │                                     </div>\n
+   │                                     <div class="form-text fw-semibold">\n
+   │                                         <span id="character-count" class="badge bg-secondary">0</span> / 10000\n
+   │                                     </div>\n
+   │                                 </div>\n
+   │                                 \n
+   │                             </div>\n
+   │                             \n
+   │                             <div class="mb-4">\n
+   │                                 <label for="ai_generate_deck" class="form-label fw-semibold">\n
+   │                                     <i class="bi bi-collection text-primary"></i> Wybierz talię\n
+   │                                 </label>\n
+   │                                 <select id="ai_generate_deck" name="ai_generate[deck]" class="form-select form-select-lg"><option value="">-- Utwórz nową talię --</option><option value="19" selected="selected">Test Deck</option></select>\n
+   │                                 <div id="ai_generate_deck_help" class="help-text">Wybierz talię, do której zostaną dodane fiszki, lub zostaw puste aby utworzyć nową</div>\n
+   │                                 \n
+   │                             </div>\n
+   │                             \n
+   │                             <div class="alert alert-light border-start border-primary border-4 mb-4">\n
+   │                                 <div class="d-flex">\n
+   │                                     <div class="me-3">\n
+   │                                         <i class="bi bi-lightbulb text-primary fs-4"></i>\n
+   │                                     </div>\n
+   │                                     <div>\n
+   │                                         <h6 class="alert-heading">Wskazówka</h6>\n
+   │                                         <p class="mb-0">Wklej fragment tekstu z podręcznika, artykułu naukowego lub notatek. AI automatycznie wyodrębni najważniejsze pojęcia i utworzy 5-10 fiszek.</p>\n
+   │                                     </div>\n
+   │                                 </div>\n
+   │                             </div>\n
+   │                             \n
+   │                             <div class="d-grid">\n
+   │                                                                     <button type="submit" id="ai_generate_generate" name="ai_generate[generate]" class="btn btn-primary btn-lg" data-loading-text="Generowanie...">Generuj fiszki</button>\n
+   │                                                             </div>\n
+   │                             \n
+   │                             <input type="hidden" id="ai_generate__token" name="ai_generate[_token]" value="0c7fba44e09.yqw_mwb_1ebx0M1RPcj4iLx_iXxqyILdvTh0ssqJXu0.meUGxE-J46icoJwhb4aw4M883j4GgfCNjQkWg4nGLLvy9VqoXJ2FjZ2Aug" /></form>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                     \n
+   │                     <div class="text-center mt-4">\n
+   │                         <small class="text-muted">\n
+   │                             <i class="bi bi-shield-check text-success"></i> Twoje dane są bezpieczne i przetwarzane lokalnie\n
+   │                         </small>\n
+   │                     </div>\n
+   │                 </div>\n
+   │                 \n
+   │                 <div class="col-lg-4">\n
+   │                     <div class="card shadow-sm border-0 mb-4">\n
+   │                         <div class="card-header bg-gradient bg-primary text-white">\n
+   │                             <h5 class="mb-0"><i class="bi bi-clock-history"></i> Ostatnie generacje</h5>\n
+   │                         </div>\n
+   │                         <div class="card-body p-0">\n
+   │                                                             <div class="list-group list-group-flush">\n
+   │                                                                             <a href="/ai/review/14" \n
+   │                                            class="list-group-item list-group-item-action py-3">\n
+   │                                             <div class="d-flex w-100 justify-content-between align-items-start mb-2">\n
+   │                                                 <small class="text-muted">\n
+   │                                                     <i class="bi bi-calendar3"></i> 14.08.2025 09:52\n
+   │                                                 </small>\n
+   │                                                                                                     <span class="badge rounded-pill bg-danger">\n
+   │                                                         <i class="bi bi-x-circle"></i> Błąd\n
+   │                                                     </span>\n
+   │                                                                                             </div>\n
+   │                                             <p class="mb-1 text-truncate small">\n
+   │                                                 Test content Test content Test content Test content Test content Test content Te...\n
+   │                                             </p>\n
+   │                                                                                     </a>\n
+   │                                                                     </div>\n
+   │                                 <div class="p-3">\n
+   │                                     <a href="/ai/history" class="btn btn-outline-primary w-100">\n
+   │                                         <i class="bi bi-list-ul"></i> Zobacz całą historię\n
+   │                                     </a>\n
+   │                                 </div>\n
+   │                                                     </div>\n
+   │                     </div>\n
+   │                     \n
+   │                     <div class="card shadow-sm border-0">\n
+   │                         <div class="card-body">\n
+   │                             <h6 class="card-title fw-semibold mb-3">\n
+   │                                 <i class="bi bi-question-circle text-primary"></i> Jak to działa?\n
+   │                             </h6>\n
+   │                             <ol class="small text-muted ps-3">\n
+   │                                 <li class="mb-2">Wklej tekst edukacyjny (1000-10000 znaków)</li>\n
+   │                                 <li class="mb-2">Wybierz talię dla nowych fiszek</li>\n
+   │                                 <li class="mb-2">AI przeanalizuje tekst i wyodrębni kluczowe pojęcia</li>\n
+   │                                 <li class="mb-2">Otrzymasz 5-10 gotowych fiszek do nauki</li>\n
+   │                                 <li>Możesz je edytować lub od razu rozpocząć naukę</li>\n
+   │                             </ol>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │     </div>\n
+   │ \n
+   │ <script>\n
+   │ document.addEventListener('DOMContentLoaded', function() {\n
+   │     const textarea = document.querySelector('[data-character-counter]');\n
+   │     const counter = document.getElementById('character-count');\n
+   │     const generateBtn = document.querySelector('[data-loading-text]');\n
+   │     \n
+   │     if (textarea && counter) {\n
+   │         function updateCount() {\n
+   │             const count = textarea.value.length;\n
+   │             counter.textContent = count;\n
+   │             \n
+   │             // Update badge color based on count\n
+   │             counter.classList.remove('bg-secondary', 'bg-danger', 'bg-warning', 'bg-success');\n
+   │             \n
+   │             if (count < 1000) {\n
+   │                 counter.classList.add('bg-danger');\n
+   │                 generateBtn.disabled = true;\n
+   │             } else if (count > 10000) {\n
+   │                 counter.classList.add('bg-danger');\n
+   │                 generateBtn.disabled = true;\n
+   │             } else if (count < 2000) {\n
+   │                 counter.classList.add('bg-warning');\n
+   │                 generateBtn.disabled = false;\n
+   │             } else {\n
+   │                 counter.classList.add('bg-success');\n
+   │                 generateBtn.disabled = false;\n
+   │             }\n
+   │         }\n
+   │         \n
+   │         textarea.addEventListener('input', updateCount);\n
+   │         updateCount();\n
+   │     }\n
+   │     \n
+   │     // Loading state for generate button\n
+   │     if (generateBtn) {\n
+   │         const form = generateBtn.closest('form');\n
+   │         form.addEventListener('submit', function(e) {\n
+   │             const count = textarea.value.length;\n
+   │             if (count < 1000 || count > 10000) {\n
+   │                 e.preventDefault();\n
+   │                 return false;\n
+   │             }\n
+   │             \n
+   │             const originalText = generateBtn.innerHTML;\n
+   │             generateBtn.disabled = true;\n
+   │             generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span><span>' + generateBtn.dataset.loadingText + '</span>';\n
+   │         });\n
+   │     }\n
+   │     \n
+   │     // Add animation to cards on page load\n
+   │     const cards = document.querySelectorAll('.card');\n
+   │     cards.forEach((card, index) => {\n
+   │         card.style.opacity = '0';\n
+   │         card.style.transform = 'translateY(20px)';\n
+   │         setTimeout(() => {\n
+   │             card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';\n
+   │             card.style.opacity = '1';\n
+   │             card.style.transform = 'translateY(0)';\n
+   │         }, index * 100);\n
+   │     });\n
+   │ });\n
+   │ </script>\n
+   │     </div>\n
+   │         </div>\n
+   │     </body>\n
+   │ </html>\n
+   │ ',
+   │     'version' => '1.1',
+   │     'statusCode' => 200,
+   │     'statusText' => 'OK',
+   │     'charset' => 'UTF-8',
+   │ ) is redirected and has header "Location" matching "/ai/generate".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:148
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:62
+   │ /var/www/html/tests/Functional/Controller/AIGeneratorErrorHandlingTest.php:277
+   │
+
+AIGenerator With Credits (App\Tests\Functional\Controller\AIGeneratorWithCredits)
+ ✘ A i generation page shows user credits
+   │
+   │ Failed asserting that Symfony\Component\DomCrawler\Crawler Object #3419 (
+   │     'uri' => 'http://localhost/ai/generate',
+   │     'defaultNamespacePrefix' => 'default',
+   │     'namespaces' => Array &0 [],
+   │     'cachedNamespaces' => ArrayObject Object #5139 (),
+   │     'baseHref' => 'http://localhost/ai/generate',
+   │     'document' => DOMDocument Object #2083 (),
+   │     'nodes' => Array &1 [
+   │         0 => DOMElement Object #3098 (
+   │             'schemaTypeInfo' => null,
+   │         ),
+   │     ],
+   │     'isHtml' => true,
+   │     'html5Parser' => Masterminds\HTML5 Object #3073 (
+   │         'defaultOptions' => Array &2 [
+   │             'encode_entities' => false,
+   │             'disable_html_ns' => true,
+   │         ],
+   │         'errors' => Array &3 [],
+   │     ),
+   │ ) matches selector ".badge" and the text "Twoje kredyty: 500" of the node matching selector ".badge" contains "Koszt generacji: 100".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/DomCrawlerAssertionsTrait.php:44
+   │ /var/www/html/tests/Functional/Controller/AIGeneratorWithCreditsTest.php:108
+   │
+ ✘ Cannot generate with insufficient credits
+   │
+   │ Error: Call to undefined method App\Tests\Functional\Controller\AIGeneratorWithCreditsTest::assertSelectorAttributeContains()
+   │
+   │ /var/www/html/tests/Functional/Controller/AIGeneratorWithCreditsTest.php:123
+   │
+ ✘ Generation deducts credits
+   │
+   │ Doctrine\ORM\ORMInvalidArgumentException: A new entity was found through the relationship 'App\Entity\CreditTransaction#user' that was not configured to cascade persist operations for entity: App\Entity\User@3081. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist this association in the mapping for example #[ORM\ManyToOne(..., cascade: ['persist'])]. If you cannot find out which entity causes the problem implement 'App\Entity\User#__toString()' to get a clue.
+   │
+   │ /var/www/html/vendor/doctrine/orm/src/ORMInvalidArgumentException.php:103
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:3860
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:416
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/src/Service/CreditService.php:84
+   │ /var/www/html/tests/Functional/Controller/AIGeneratorWithCreditsTest.php:150
+   │
+ ✔ Credits are refunded on generation error
+ ✔ A i usage log is created on generation
+ ✘ Credit cost can be configured
+   │
+   │ Failed asserting that Symfony\Component\DomCrawler\Crawler Object #6551 (
+   │     'uri' => 'http://localhost/ai/generate',
+   │     'defaultNamespacePrefix' => 'default',
+   │     'namespaces' => Array &0 [],
+   │     'cachedNamespaces' => ArrayObject Object #2859 (),
+   │     'baseHref' => 'http://localhost/ai/generate',
+   │     'document' => DOMDocument Object #2822 (),
+   │     'nodes' => Array &1 [
+   │         0 => DOMElement Object #2820 (
+   │             'schemaTypeInfo' => null,
+   │         ),
+   │     ],
+   │     'isHtml' => true,
+   │     'html5Parser' => Masterminds\HTML5 Object #2837 (
+   │         'defaultOptions' => Array &2 [
+   │             'encode_entities' => false,
+   │             'disable_html_ns' => true,
+   │         ],
+   │         'errors' => Array &3 [],
+   │     ),
+   │ ) matches selector ".badge" and the text "Twoje kredyty: 75" of the node matching selector ".badge" contains "Koszt generacji: 50".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/DomCrawlerAssertionsTrait.php:44
+   │ /var/www/html/tests/Functional/Controller/AIGeneratorWithCreditsTest.php:241
+   │
+ ✔ Multiple generations track credits correctly
+ ✔ New user gets default credits
+
+Admin Controller (App\Tests\Functional\Controller\AdminController)
+ ✔ Admin dashboard requires authentication
+ ✔ Regular user cannot access admin dashboard
+ ✔ Admin can access dashboard
+ ✘ Dashboard displays correct statistics
+   │
+   │ Failed asserting that '<head>\n
+   │         <meta charset="UTF-8">\n
+   │         <title>Panel Administracyjny</title>\n
+   │         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">\n
+   │                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">\n
+   │             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">\n
+   │         \n
+   │                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>\n
+   │ \n
+   │             </head>\n
+   │     <body>\n
+   │         <div class="container">\n
+   │                 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">\n
+   │         <div class="container-fluid">\n
+   │             <a class="navbar-brand" href="/">Fiszki App</a>\n
+   │             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n
+   │                 <span class="navbar-toggler-icon"></span>\n
+   │             </button>\n
+   │             <div class="collapse navbar-collapse" id="navbarNav">\n
+   │                 <ul class="navbar-nav me-auto">\n
+   │                                             <li class="nav-item">\n
+   │                             <a class="nav-link" href="/dashboard/">Dashboard</a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/deck/">Talie</a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/flashcard/">Fiszki</a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/ai/generate">\n
+   │                                 <i class="bi bi-magic"></i> Generuj z AI\n
+   │                             </a>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="nav-link" href="/study/">\n
+   │                                 <i class="bi bi-mortarboard"></i> Sesja nauki\n
+   │                             </a>\n
+   │                         </li>\n
+   │                                                     <li class="nav-item">\n
+   │                                 <a class="nav-link text-danger" href="/admin/">\n
+   │                                     <i class="bi bi-shield-lock-fill"></i> Panel Admin\n
+   │                                 </a>\n
+   │                             </li>\n
+   │                                                             </ul>\n
+   │                 <ul class="navbar-nav ms-auto">\n
+   │                                             <li class="nav-item">\n
+   │                             <span class="navbar-text me-3">\n
+   │                                 Witaj, admin@test.com!\n
+   │                             </span>\n
+   │                         </li>\n
+   │                         <li class="nav-item">\n
+   │                             <a class="btn btn-outline-danger" href="/logout">Wyloguj</a>\n
+   │                         </li>\n
+   │                                     </ul>\n
+   │             </div>\n
+   │         </div>\n
+   │     </nav>\n
+   │ \n
+   │     <div class="container">\n
+   │                                     <nav aria-label="breadcrumb" class="mt-3 mb-4">\n
+   │                     <ol class="breadcrumb bg-white border px-3 py-2 rounded-3 shadow-sm">\n
+   │                         <li class="breadcrumb-item">\n
+   │                             <a href="/" class="text-decoration-none text-primary">\n
+   │                                 <i class="bi bi-house-door"></i> Strona główna\n
+   │                             </a>\n
+   │                         </li>\n
+   │                             <li class="breadcrumb-item active" aria-current="page">\n
+   │         <i class="bi bi-shield-lock-fill"></i> Panel Administracyjny\n
+   │     </li>\n
+   │                     </ol>\n
+   │                 </nav>\n
+   │                             \n
+   │         <div class="container-fluid px-4">\n
+   │     <div class="d-flex justify-content-between align-items-center mb-4">\n
+   │         <div>\n
+   │             <h1 class="h2 mb-1">\n
+   │                 <i class="bi bi-shield-lock-fill text-danger"></i> Panel Administracyjny\n
+   │             </h1>\n
+   │             <p class="text-muted mb-0">Zarządzaj systemem i użytkownikami</p>\n
+   │         </div>\n
+   │         <div class="btn-group" role="group">\n
+   │             <a href="/admin/users/" class="btn btn-outline-primary">\n
+   │                 <i class="bi bi-people"></i> Użytkownicy\n
+   │             </a>\n
+   │             <a href="/admin/settings/" class="btn btn-outline-secondary">\n
+   │                 <i class="bi bi-gear"></i> Ustawienia\n
+   │             </a>\n
+   │         </div>\n
+   │     </div>\n
+   │ \n
+   │     <div class="row g-3 mb-4">\n
+   │         <div class="col-sm-6 col-lg-3">\n
+   │             <div class="card border-0 shadow-sm h-100">\n
+   │                 <div class="card-body">\n
+   │                     <div class="d-flex align-items-center">\n
+   │                         <div class="flex-shrink-0">\n
+   │                             <div class="bg-primary bg-gradient rounded-circle p-3">\n
+   │                                 <i class="bi bi-people-fill text-white fs-4"></i>\n
+   │                             </div>\n
+   │                         </div>\n
+   │                         <div class="flex-grow-1 ms-3">\n
+   │                             <h3 class="mb-0">3</h3>\n
+   │                             <p class="text-muted mb-0">Użytkowników</p>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │         \n
+   │         <div class="col-sm-6 col-lg-3">\n
+   │             <div class="card border-0 shadow-sm h-100">\n
+   │                 <div class="card-body">\n
+   │                     <div class="d-flex align-items-center">\n
+   │                         <div class="flex-shrink-0">\n
+   │                             <div class="bg-success bg-gradient rounded-circle p-3">\n
+   │                                 <i class="bi bi-coin text-white fs-4"></i>\n
+   │                             </div>\n
+   │                         </div>\n
+   │                         <div class="flex-grow-1 ms-3">\n
+   │                             <h3 class="mb-0">1 250</h3>\n
+   │                             <p class="text-muted mb-0">Kredytów w systemie</p>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │         \n
+   │         <div class="col-sm-6 col-lg-3">\n
+   │             <div class="card border-0 shadow-sm h-100">\n
+   │                 <div class="card-body">\n
+   │                     <div class="d-flex align-items-center">\n
+   │                         <div class="flex-shrink-0">\n
+   │                             <div class="bg-info bg-gradient rounded-circle p-3">\n
+   │                                 <i class="bi bi-cpu text-white fs-4"></i>\n
+   │                             </div>\n
+   │                         </div>\n
+   │                         <div class="flex-grow-1 ms-3">\n
+   │                             <h3 class="mb-0">0</h3>\n
+   │                             <p class="text-muted mb-0">Tokenów użytych</p>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │         \n
+   │         <div class="col-sm-6 col-lg-3">\n
+   │             <div class="card border-0 shadow-sm h-100">\n
+   │                 <div class="card-body">\n
+   │                     <div class="d-flex align-items-center">\n
+   │                         <div class="flex-shrink-0">\n
+   │                             <div class="bg-warning bg-gradient rounded-circle p-3">\n
+   │                                 <i class="bi bi-currency-dollar text-white fs-4"></i>\n
+   │                             </div>\n
+   │                         </div>\n
+   │                         <div class="flex-grow-1 ms-3">\n
+   │                             <h3 class="mb-0">$0.00</h3>\n
+   │                             <p class="text-muted mb-0">Szacowany koszt</p>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │     </div>\n
+   │ \n
+   │     <div class="row g-3 mb-4">\n
+   │         <div class="col-md-4">\n
+   │             <div class="card border-0 shadow-sm">\n
+   │                 <div class="card-body">\n
+   │                     <h6 class="card-title text-muted">Statystyki kredytów</h6>\n
+   │                     <div class="mb-3">\n
+   │                         <div class="d-flex justify-content-between align-items-center">\n
+   │                             <span>Średnia na użytkownika</span>\n
+   │                             <strong>417</strong>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                     <div class="mb-3">\n
+   │                         <div class="d-flex justify-content-between align-items-center">\n
+   │                             <span>Przyznane przez admina</span>\n
+   │                             <strong class="text-success">+200</strong>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                     <div>\n
+   │                         <div class="d-flex justify-content-between align-items-center">\n
+   │                             <span>Wydane na AI</span>\n
+   │                             <strong class="text-danger">-100</strong>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │         \n
+   │         <div class="col-md-4">\n
+   │             <div class="card border-0 shadow-sm">\n
+   │                 <div class="card-body">\n
+   │                     <h6 class="card-title text-muted">Ustawienia systemu</h6>\n
+   │                     <div class="mb-3">\n
+   │                         <div class="d-flex justify-content-between align-items-center">\n
+   │                             <span>Kredyty dla nowych</span>\n
+   │                             <strong>500</strong>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                     <div class="mb-3">\n
+   │                         <div class="d-flex justify-content-between align-items-center">\n
+   │                             <span>Koszt generacji AI</span>\n
+   │                             <strong>100</strong>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                     <div class="text-center mt-3">\n
+   │                         <a href="/admin/settings/" class="btn btn-sm btn-outline-secondary">\n
+   │                             <i class="bi bi-gear"></i> Zmień ustawienia\n
+   │                         </a>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │         \n
+   │         <div class="col-md-4">\n
+   │             <div class="card border-0 shadow-sm">\n
+   │                 <div class="card-body">\n
+   │                     <h6 class="card-title text-muted">Użycie tokenów</h6>\n
+   │                     <div class="mb-3">\n
+   │                         <div class="d-flex justify-content-between align-items-center">\n
+   │                             <span>Ten miesiąc</span>\n
+   │                             <strong>0</strong>\n
+   │                         </div>\n
+   │                     </div>\n
+   │                     <div class="progress mb-2">\n
+   │                         <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1000000">\n
+   │                         </div>\n
+   │                     </div>\n
+   │                     <small class="text-muted">Limit: 1,000,000 tokenów/miesiąc</small>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │     </div>\n
+   │ \n
+   │     <div class="row g-4">\n
+   │         <div class="col-lg-6">\n
+   │             <div class="card border-0 shadow-sm">\n
+   │                 <div class="card-header bg-white border-0 pt-4 pb-3">\n
+   │                     <h5 class="mb-0">\n
+   │                         <i class="bi bi-clock-history"></i> Ostatnie transakcje kredytów\n
+   │                     </h5>\n
+   │                 </div>\n
+   │                 <div class="card-body">\n
+   │                                             <div class="table-responsive">\n
+   │                             <table class="table table-sm">\n
+   │                                 <thead>\n
+   │                                     <tr>\n
+   │                                         <th>Użytkownik</th>\n
+   │                                         <th>Typ</th>\n
+   │                                         <th class="text-end">Kwota</th>\n
+   │                                         <th>Data</th>\n
+   │                                     </tr>\n
+   │                                 </thead>\n
+   │                                 <tbody>\n
+   │                                                                             <tr>\n
+   │                                             <td>\n
+   │                                                 <a href="/admin/users/46">\n
+   │                                                     user@test.com\n
+   │                                                 </a>\n
+   │                                             </td>\n
+   │                                             <td>\n
+   │                                                                                                     <span class="badge bg-info">AI</span>\n
+   │                                                                                             </td>\n
+   │                                             <td class="text-end">\n
+   │                                                                                                     <span class="text-danger">-100</span>\n
+   │                                                                                             </td>\n
+   │                                             <td>\n
+   │                                                 <small>14.08 09:52</small>\n
+   │                                             </td>\n
+   │                                         </tr>\n
+   │                                                                             <tr>\n
+   │                                             <td>\n
+   │                                                 <a href="/admin/users/47">\n
+   │                                                     user2@test.com\n
+   │                                                 </a>\n
+   │                                             </td>\n
+   │                                             <td>\n
+   │                                                                                                     <span class="badge bg-success">Admin</span>\n
+   │                                                                                             </td>\n
+   │                                             <td class="text-end">\n
+   │                                                                                                     <span class="text-success">+200</span>\n
+   │                                                                                             </td>\n
+   │                                             <td>\n
+   │                                                 <small>14.08 09:52</small>\n
+   │                                             </td>\n
+   │                                         </tr>\n
+   │                                                                     </tbody>\n
+   │                             </table>\n
+   │                         </div>\n
+   │                                     </div>\n
+   │             </div>\n
+   │         </div>\n
+   │         \n
+   │         <div class="col-lg-6">\n
+   │             <div class="card border-0 shadow-sm">\n
+   │                 <div class="card-header bg-white border-0 pt-4 pb-3">\n
+   │                     <h5 class="mb-0">\n
+   │                         <i class="bi bi-exclamation-triangle text-warning"></i> Użytkownicy z niskim stanem kredytów\n
+   │                     </h5>\n
+   │                 </div>\n
+   │                 <div class="card-body">\n
+   │                                             <div class="list-group list-group-flush">\n
+   │                                                             <div class="list-group-item px-0">\n
+   │                                     <div class="d-flex justify-content-between align-items-center">\n
+   │                                         <div>\n
+   │                                             <a href="/admin/users/47">\n
+   │                                                 user2@test.com\n
+   │                                             </a>\n
+   │                                         </div>\n
+   │                                         <div>\n
+   │                                             <span class="badge bg-danger">50 kredytów</span>\n
+   │                                             <a href="/admin/users/47" class="btn btn-sm btn-outline-success ms-2">\n
+   │                                                 <i class="bi bi-plus-circle"></i> Doładuj\n
+   │                                             </a>\n
+   │                                         </div>\n
+   │                                     </div>\n
+   │                                 </div>\n
+   │                                                     </div>\n
+   │                                     </div>\n
+   │             </div>\n
+   │         </div>\n
+   │     </div>\n
+   │ </div>\n
+   │     </div>\n
+   │         </div>\n
+   │     </body>\n
+   │ \n
+   │ ' [UTF-8](length: 16582) contains "1250" [ASCII](length: 4).
+   │
+   │ /var/www/html/tests/Functional/Controller/AdminControllerTest.php:162
+   │
+ ✔ Dashboard shows recent transactions
+ ✘ Dashboard shows users with low credits
+   │
+   │ Failed asserting that Symfony\Component\DomCrawler\Crawler Object #9199 (
+   │     'uri' => 'http://localhost/admin/',
+   │     'defaultNamespacePrefix' => 'default',
+   │     'namespaces' => Array &0 [],
+   │     'cachedNamespaces' => ArrayObject Object #4588 (),
+   │     'baseHref' => 'http://localhost/admin/',
+   │     'document' => DOMDocument Object #9220 (),
+   │     'nodes' => Array &1 [
+   │         0 => DOMElement Object #9218 (
+   │             'schemaTypeInfo' => null,
+   │         ),
+   │     ],
+   │     'isHtml' => true,
+   │     'html5Parser' => Masterminds\HTML5 Object #9216 (
+   │         'defaultOptions' => Array &2 [
+   │             'encode_entities' => false,
+   │             'disable_html_ns' => true,
+   │         ],
+   │         'errors' => Array &3 [],
+   │     ),
+   │ ) matches selector ".card" and the text "2 Użytkowników" of the node matching selector ".card" contains "lowcredit@test.com".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/DomCrawlerAssertionsTrait.php:44
+   │ /var/www/html/tests/Functional/Controller/AdminControllerTest.php:207
+   │
+ ✔ Dashboard links to users and settings
+ ✘ Admin navigation menu shows admin link
+   │
+   │ Failed asserting that the Response is successful.
+   │ HTTP/1.1 301 Moved Permanently
+   │ Cache-Control: max-age=0, must-revalidate, private
+   │ Content-Type:  text/html; charset=utf-8
+   │ Date:          Thu, 14 Aug 2025 09:52:30 GMT
+   │ Expires:       Thu, 14 Aug 2025 09:52:30 GMT
+   │ Location:      http://localhost/dashboard/
+   │ X-Robots-Tag:  noindex
+   │
+   │ <!DOCTYPE html>
+   │ <html>
+   │     <head>
+   │         <meta charset="UTF-8" />
+   │         <meta http-equiv="refresh" content="0;url='http://localhost/dashboard/'" />
+   │
+   │         <title>Redirecting to http://localhost/dashboard/</title>
+   │     </head>
+   │     <body>
+   │         Redirecting to <a href="http://localhost/dashboard/">http://localhost/dashboard/</a>.
+   │     </body>
+   │ </html>
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:148
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:33
+   │ /var/www/html/tests/Functional/Controller/AdminControllerTest.php:235
+   │
+ ✘ Regular user does not see admin link
+   │
+   │ Failed asserting that the Response is successful.
+   │ HTTP/1.1 301 Moved Permanently
+   │ Cache-Control: max-age=0, must-revalidate, private
+   │ Content-Type:  text/html; charset=utf-8
+   │ Date:          Thu, 14 Aug 2025 09:52:30 GMT
+   │ Expires:       Thu, 14 Aug 2025 09:52:30 GMT
+   │ Location:      http://localhost/dashboard/
+   │ X-Robots-Tag:  noindex
+   │
+   │ <!DOCTYPE html>
+   │ <html>
+   │     <head>
+   │         <meta charset="UTF-8" />
+   │         <meta http-equiv="refresh" content="0;url='http://localhost/dashboard/'" />
+   │
+   │         <title>Redirecting to http://localhost/dashboard/</title>
+   │     </head>
+   │     <body>
+   │         Redirecting to <a href="http://localhost/dashboard/">http://localhost/dashboard/</a>.
+   │     </body>
+   │ </html>
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:148
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:33
+   │ /var/www/html/tests/Functional/Controller/AdminControllerTest.php:246
+   │
+
+Admin User Controller (App\Tests\Functional\Controller\AdminUserController)
+ ✘ Users list requires admin role
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+ ✘ Admin can view users list
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+ ✘ Admin can view user details
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+ ✘ Admin can add credits to user
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+ ✘ Cannot add negative credits
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+ ✘ Admin can toggle admin role for other users
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+ ✘ Admin cannot toggle own admin role
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+ ✘ User details shows correct statistics
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+ ✘ Quick add credits modal
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+ ✘ User cannot access other user details
+   │
+   │ Doctrine\DBAL\Exception\UniqueConstraintViolationException: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'default_credits' for key 'system_settings.UNIQ_8CAF11475FA1E697'
+   │
+   │ /var/www/html/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:62
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1976
+   │ /var/www/html/vendor/doctrine/dbal/src/Connection.php:1918
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:194
+   │ /var/www/html/vendor/doctrine/dbal/src/Statement.php:249
+   │ /var/www/html/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:288
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:1186
+   │ /var/www/html/vendor/doctrine/orm/src/UnitOfWork.php:448
+   │ /var/www/html/vendor/doctrine/orm/src/EntityManager.php:414
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:42
+   │ /var/www/html/tests/Functional/Controller/AdminUserControllerTest.php:29
+   │
+
+Credit Service (App\Tests\Unit\Service\CreditService)
+ ✔ Initialize user credits creates new credits with default amount
+ ✔ Get user credits returns existing credits
+ ✔ Get user credits creates new credits if not exist
+ ✔ Has enough credits returns true when sufficient
+ ✔ Has enough credits returns false when insufficient
+ ✔ Charge credits deducts amount and creates transaction
+ ✔ Charge credits throws exception when insufficient funds
+ ✔ Grant credits adds amount and creates transaction
+ ✔ Refund credits adds amount back and creates transaction
+
+Credit Transaction (App\Tests\Unit\Entity\CreditTransaction)
+ ✔ Constructor sets all values
+ ✔ Constructor without optional parameters
+ ✔ Transaction types
+ ✔ Is debit returns true for negative amount
+ ✔ Is credit returns true for positive amount
+ ✔ Is debit and is credit for zero amount
+ ✔ Metadata getter and setter
+ ✔ Different transaction scenarios
+ ✔ Getters return correct values
+
+Deck (App\Tests\Unit\Entity\Deck)
+ ✔ Getters and setters
+ ✔ User association
+ ✔ Flashcards collection
+ ✔ Add same flashcard twice
+ ✔ Remove non existent flashcard
+ ✔ Deck with multiple flashcards
+ ✔ Empty description
+
+Flashcard (App\Tests\Unit\Entity\Flashcard)
+ ✔ Getters and setters
+ ✔ Deck association
+ ✔ Long content
+ ✔ Empty content
+ ✔ Special characters
+ ✔ Unicode content
+ ✔ Html content
+ ✔ Change deck
+ ✔ Remove deck
+ ✔ Multiline content
+
+Flashcard Progress (App\Tests\Unit\Entity\FlashcardProgress)
+ ✔ Initial state
+ ✔ User association
+ ✔ Flashcard association
+ ✔ Study session association
+ ✔ Setters and getters
+ ✔ Increment total attempts
+ ✔ Increment correct attempts
+ ✔ Accuracy calculation
+ ✔ Is due
+ ✔ Ease factor bounds
+ ✔ Quality values
+ ✔ Progress after multiple reviews
+
+Security Controller (App\Tests\Functional\SecurityController)
+ ✔ Login page is accessible
+ ✔ Login with valid credentials
+ ✘ Login with invalid password
+   │
+   │ Failed asserting that Symfony\Component\DomCrawler\Crawler Object #8250 (
+   │     'uri' => 'http://localhost/login',
+   │     'defaultNamespacePrefix' => 'default',
+   │     'namespaces' => Array &0 [],
+   │     'cachedNamespaces' => ArrayObject Object #6892 (),
+   │     'baseHref' => 'http://localhost/login',
+   │     'document' => DOMDocument Object #4553 (),
+   │     'nodes' => Array &1 [
+   │         0 => DOMElement Object #7053 (
+   │             'schemaTypeInfo' => null,
+   │         ),
+   │     ],
+   │     'isHtml' => true,
+   │     'html5Parser' => Masterminds\HTML5 Object #3173 (
+   │         'defaultOptions' => Array &2 [
+   │             'encode_entities' => false,
+   │             'disable_html_ns' => true,
+   │         ],
+   │         'errors' => Array &3 [],
+   │     ),
+   │ ) matches selector ".alert-danger" and the text "The presented password is invalid." of the node matching selector ".alert-danger" contains "Invalid credentials".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/DomCrawlerAssertionsTrait.php:44
+   │ /var/www/html/tests/Functional/SecurityControllerTest.php:93
+   │
+ ✘ Login with non existent email
+   │
+   │ Failed asserting that Symfony\Component\DomCrawler\Crawler Object #7174 (
+   │     'uri' => 'http://localhost/login',
+   │     'defaultNamespacePrefix' => 'default',
+   │     'namespaces' => Array &0 [],
+   │     'cachedNamespaces' => ArrayObject Object #7750 (),
+   │     'baseHref' => 'http://localhost/login',
+   │     'document' => DOMDocument Object #7608 (),
+   │     'nodes' => Array &1 [
+   │         0 => DOMElement Object #7631 (
+   │             'schemaTypeInfo' => null,
+   │         ),
+   │     ],
+   │     'isHtml' => true,
+   │     'html5Parser' => Masterminds\HTML5 Object #4752 (
+   │         'defaultOptions' => Array &2 [
+   │             'encode_entities' => false,
+   │             'disable_html_ns' => true,
+   │         ],
+   │         'errors' => Array &3 [],
+   │     ),
+   │ ) matches selector ".alert-danger" and the text "Email could not be found." of the node matching selector ".alert-danger" contains "Invalid credentials".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/DomCrawlerAssertionsTrait.php:44
+   │ /var/www/html/tests/Functional/SecurityControllerTest.php:108
+   │
+ ✔ Register page is accessible
+ ✘ Successful registration
+   │
+   │ Failed asserting that Symfony\Component\HttpFoundation\Response Object #5019 (
+   │     'headers' => Symfony\Component\HttpFoundation\ResponseHeaderBag Object #5012 (
+   │         'headers' => Array &0 [
+   │             'cache-control' => Array &1 [
+   │                 0 => 'max-age=0, must-revalidate, private',
+   │             ],
+   │             'date' => Array &2 [
+   │                 0 => 'Thu, 14 Aug 2025 09:52:31 GMT',
+   │             ],
+   │             'content-type' => Array &3 [
+   │                 0 => 'text/html; charset=UTF-8',
+   │             ],
+   │             'x-robots-tag' => Array &4 [
+   │                 0 => 'noindex',
+   │             ],
+   │             'expires' => Array &5 [
+   │                 0 => 'Thu, 14 Aug 2025 09:52:31 GMT',
+   │             ],
+   │         ],
+   │         'cacheControl' => Array &6 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'computedCacheControl' => Array &7 [
+   │             'max-age' => '0',
+   │             'must-revalidate' => true,
+   │             'private' => true,
+   │         ],
+   │         'cookies' => Array &8 [],
+   │         'headerNames' => Array &9 [
+   │             'cache-control' => 'Cache-Control',
+   │             'date' => 'Date',
+   │             'content-type' => 'Content-Type',
+   │             'x-robots-tag' => 'X-Robots-Tag',
+   │             'expires' => 'Expires',
+   │         ],
+   │     ),
+   │     'content' => '<!DOCTYPE html>\n
+   │ <html>\n
+   │     <head>\n
+   │         <meta charset="UTF-8">\n
+   │         <title>Rejestracja</title>\n
+   │         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">\n
+   │                         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">\n
+   │             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">\n
+   │         \n
+   │     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">\n
+   │     <style>\n
+   │         .form-floating > .form-control:focus ~ label,\n
+   │         .form-floating > .form-control:not(:placeholder-shown) ~ label {\n
+   │             color: #0d6efd;\n
+   │             transform: scale(.85) translateY(-0.5rem) translateX(0.15rem);\n
+   │         }\n
+   │         .form-control:focus {\n
+   │             border-color: #0d6efd;\n
+   │             box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);\n
+   │         }\n
+   │         .form-floating > label {\n
+   │             position: absolute;\n
+   │             top: 0;\n
+   │             left: 0;\n
+   │             height: 100%;\n
+   │             padding: 1rem 0.75rem;\n
+   │             pointer-events: none;\n
+   │             border: 1px solid transparent;\n
+   │             transform-origin: 0 0;\n
+   │             transition: opacity .1s ease-in-out,transform .1s ease-in-out;\n
+   │         }\n
+   │         .btn-primary {\n
+   │             transition: all 0.2s ease-in-out;\n
+   │         }\n
+   │         .btn-primary:hover {\n
+   │             transform: translateY(-1px);\n
+   │             box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);\n
+   │         }\n
+   │         .btn-success {\n
+   │             transition: all 0.2s ease-in-out;\n
+   │         }\n
+   │         .btn-success:hover {\n
+   │             transform: translateY(-1px);\n
+   │             box-shadow: 0 4px 12px rgba(25, 135, 84, 0.2);\n
+   │         }\n
+   │         .card {\n
+   │             transition: all 0.3s ease-in-out;\n
+   │         }\n
+   │         .card:hover {\n
+   │             transform: translateY(-2px);\n
+   │             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;\n
+   │         }\n
+   │     </style>\n
+   │ \n
+   │                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>\n
+   │ \n
+   │             </head>\n
+   │     <body>\n
+   │         <div class="container">\n
+   │                 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">\n
+   │         <div class="container-fluid">\n
+   │             <a class="navbar-brand" href="/">Fiszki App</a>\n
+   │             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n
+   │                 <span class="navbar-toggler-icon"></span>\n
+   │             </button>\n
+   │             <div class="collapse navbar-collapse" id="navbarNav">\n
+   │                 <ul class="navbar-nav me-auto">\n
+   │                                     </ul>\n
+   │                 <ul class="navbar-nav ms-auto">\n
+   │                                                                         <li class="nav-item">\n
+   │                                 <a class="btn btn-outline-primary" href="/login">Zaloguj</a>\n
+   │                             </li>\n
+   │                                                                                     </ul>\n
+   │             </div>\n
+   │         </div>\n
+   │     </nav>\n
+   │ \n
+   │     <div class="container">\n
+   │                 \n
+   │             <div class="container py-5">\n
+   │         <div class="row justify-content-center">\n
+   │             <div class="col-12 col-md-8 col-lg-6">\n
+   │                 <div class="card shadow-lg border-0 rounded-4">\n
+   │                     <div class="card-header bg-success text-white text-center py-4 rounded-top-4">\n
+   │                         <h3 class="mb-0 fw-bold">Rejestracja</h3>\n
+   │                     </div>\n
+   │                     <div class="card-body p-4 p-md-5">\n
+   │                                                     <div class="alert alert-danger alert-dismissible fade show rounded-3" role="alert">\n
+   │                                 An error occurred during registration.\n
+   │                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n
+   │                             </div>\n
+   │                         \n
+   │                         <form name="registration" method="post" class="needs-validation" novalidate="novalidate">\n
+   │                             \n
+   │ \n
+   │                             <div class="form-floating mb-4">\n
+   │                                 <input type="email" id="registration_email" name="registration[email]" required="required" class="form-control form-control-lg" placeholder="Wprowadź adres email" required="required" autofocus="autofocus" value="newuser@example.com" />\n
+   │                                 <label class="form-label required" for="registration_email">Email</label>\n
+   │                                 \n
+   │                             </div>\n
+   │ \n
+   │                             <div class="form-floating mb-4 position-relative">\n
+   │                                 <input type="password" id="registration_password" name="registration[password]" required="required" class="form-control form-control-lg" placeholder="Wprowadź hasło" required="required" />\n
+   │                                 <label class="form-label required" for="registration_password">Hasło</label>\n
+   │                                 \n
+   │                                 <button type="button" class="btn btn-link text-muted position-absolute end-0 top-50 translate-middle-y pe-3" onclick="togglePasswordVisibility('registration_password')">\n
+   │                                     <i class="bi bi-eye-fill" id="eye-icon-registration_password"></i>\n
+   │                                 </button>\n
+   │                             </div>\n
+   │ \n
+   │                             <div class="mb-4 form-check">\n
+   │                                 <input type="checkbox" id="registration_agreeTerms" name="registration[agreeTerms]" required="required" class="form-check-input" value="1" checked="checked" />\n
+   │                                 <label class="form-check-label required" for="registration_agreeTerms">Akceptuję regulamin</label>\n
+   │                                 \n
+   │                             </div>\n
+   │ \n
+   │                             <div class="row">\n
+   │                                 <div class="col">\n
+   │                                     <div class="d-grid gap-2">\n
+   │                                         <button class="btn btn-success btn-lg py-3 rounded-3" type="submit">\n
+   │                                             <i class="bi bi-person-plus me-2"></i>Zarejestruj się\n
+   │                                         </button>\n
+   │                                     </div>\n
+   │                                 </div>\n
+   │                             </div>\n
+   │                         <input type="hidden" id="registration__token" name="registration[_token]" value="e8fc53d1da738f2e1651f6e.dpndVxEFU_tPsGU6I_vvxc0Gr8ju7ushTquLTGB-ghc.EqyLNSBXNbU82CJCe72WnLcy1pKkp5ETLczpKA9IyV0MoI0NPFoUjgzEUQ" /></form>\n
+   │                     </div>\n
+   │                 </div>\n
+   │             </div>\n
+   │         </div>\n
+   │     </div>\n
+   │     <script>\n
+   │         function togglePasswordVisibility(inputId) {\n
+   │             const input = document.getElementById(inputId);\n
+   │             const icon = document.getElementById('eye-icon-' + inputId);\n
+   │             if (input.type === 'password') {\n
+   │                 input.type = 'text';\n
+   │                 icon.classList.remove('bi-eye-fill');\n
+   │                 icon.classList.add('bi-eye-slash-fill');\n
+   │             } else {\n
+   │                 input.type = 'password';\n
+   │                 icon.classList.remove('bi-eye-slash-fill');\n
+   │                 icon.classList.add('bi-eye-fill');\n
+   │             }\n
+   │         }\n
+   │     </script>\n
+   │     </div>\n
+   │         </div>\n
+   │     </body>\n
+   │ </html>\n
+   │ ',
+   │     'version' => '1.1',
+   │     'statusCode' => 200,
+   │     'statusText' => 'OK',
+   │     'charset' => 'UTF-8',
+   │ ) is redirected and has header "Location" matching "/verify/email".
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:148
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/BrowserKitAssertionsTrait.php:62
+   │ /var/www/html/tests/Functional/SecurityControllerTest.php:128
+   │
+ ✘ Registration with existing email
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/SecurityControllerTest.php:16
+   │
+ ✘ Registration with weak password
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/SecurityControllerTest.php:16
+   │
+ ✘ Logout
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/SecurityControllerTest.php:16
+   │
+ ✘ Access protected route without login
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/SecurityControllerTest.php:16
+   │
+ ✘ Access protected route after login
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/SecurityControllerTest.php:16
+   │
+ ✘ Public pages are accessible
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/SecurityControllerTest.php:16
+   │
+
+Spaced Repetition Service (App\Tests\Unit\Service\SpacedRepetitionService)
+ ✔ Calculate next review with perfect response
+ ✔ Calculate next review with poor response
+ ✔ Calculate next review with good response
+ ✔ Progression of intervals
+ ✔ Invalid quality throws exception
+ ✔ Negative quality throws exception
+ ✔ Get quality description
+ ✔ Get due cards
+ ✔ Calculate session stats
+ ✔ Ease factor minimum
+ ✔ Ease factor adjustment
+
+Study Controller (App\Tests\Functional\StudyController)
+ ✘ Study index requires authentication
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+ ✘ Study index shows decks with stats
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+ ✘ Start study session
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+ ✘ Cannot start session for other users deck
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+ ✘ Study card display
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+ ✘ Answer card
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+ ✘ Complete session
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+ ✘ Study history
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+ ✘ No due cards redirect
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+ ✘ Invalid quality answer
+   │
+   │ LogicException: Booting the kernel before calling "Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createClient()" is not supported, the kernel should only be booted once.
+   │
+   │ /var/www/html/vendor/symfony/framework-bundle/Test/WebTestCase.php:41
+   │ /var/www/html/tests/Functional/StudyControllerTest.php:21
+   │
+
+Study Session (App\Tests\Unit\Entity\StudySession)
+ ✔ Initial state
+ ✔ User association
+ ✔ Deck association
+ ✔ Setters and getters
+ ✔ Increment reviewed cards
+ ✔ Increment correct answers
+ ✔ Accuracy calculation
+ ✔ Flashcard progress collection
+ ✔ Status values
+ ✔ Perfect session
+ ✔ Partial session
+
+User (App\Tests\Unit\Entity\User)
+ ✔ Getters and setters
+ ✔ Roles
+ ✔ Email verification
+ ✔ Confirmation token
+ ✔ Erase credentials
+ ✔ Id is null initially
+ ✔ Unique email
+
+User Credits (App\Tests\Unit\Entity\UserCredits)
+ ✔ Constructor sets initial values
+ ✔ Add credits increases balance
+ ✔ Add credits throws exception for negative amount
+ ✔ Deduct credits decreases balance
+ ✔ Deduct credits throws exception for negative amount
+ ✔ Deduct credits throws exception for insufficient balance
+ ✔ Has enough credits returns true when sufficient
+ ✔ Has enough credits returns false when insufficient
+ ✔ Multiple transactions calculate correctly
+ ✔ Updated at changes on operations
+ ✔ Getters return correct values
+
+ERRORS!
+Tests: 149, Assertions: 409, Errors: 29, Failures: 16.

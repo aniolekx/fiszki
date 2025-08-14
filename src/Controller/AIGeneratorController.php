@@ -252,7 +252,7 @@ class AIGeneratorController extends AbstractController
                     $deck->getName()
                 ));
                 
-                return $this->redirectToRoute('app_deck_show', ['id' => $deck->getId()]);
+                return $this->redirectToRoute('deck_show', ['id' => $deck->getId()]);
             }
         }
 

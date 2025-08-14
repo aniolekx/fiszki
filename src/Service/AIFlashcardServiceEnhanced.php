@@ -208,7 +208,6 @@ class AIFlashcardServiceEnhanced
                 ],
                 'temperature' => $this->temperature,
                 'max_tokens' => $this->maxTokens,
-                'timeout' => 30, // 30 seconds timeout
             ]);
         } catch (\Exception $e) {
             // Parse specific OpenAI errors

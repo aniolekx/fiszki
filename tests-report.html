@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Test Documentation</title>
+        <style>
+            body {
+                text-rendering: optimizeLegibility;
+                font-family: Source SansSerif Pro, Arial, sans-serif;
+                font-variant-ligatures: common-ligatures;
+                font-kerning: normal;
+                margin-left: 2rem;
+                background-color: #fff;
+                color: #000;
+            }
+
+            body > ul > li {
+                font-size: larger;
+            }
+
+            h2 {
+                font-size: larger;
+                text-decoration-line: underline;
+                text-decoration-thickness: 2px;
+                margin: 0;
+                padding: 0.5rem 0;
+            }
+
+            ul {
+                list-style: none;
+                margin: 0 0 2rem;
+                padding: 0 0 0 1rem;
+                text-indent: -1rem;
+            }
+
+            .success:before {
+                color: #4e9a06;
+                content: '✓';
+                padding-right: 0.5rem;
+            }
+
+            .defect {
+                color: #a40000;
+            }
+
+            .defect:before {
+                color: #a40000;
+                content: '✗';
+                padding-right: 0.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>AIFlashcard Service Enhanced (App\Tests\Unit\Service\AIFlashcardServiceEnhanced)</h2>
+        <ul>
+            <li class="success">Throws exception when api key not configured</li>
+            <li class="success">Check monthly limit throws exception when exceeded</li>
+            <li class="success">Check monthly limit warns when approaching</li>
+            <li class="success">Estimate cost calculates correctly</li>
+            <li class="success">Validates text length</li>
+            <li class="defect">Open a i exception from a p i errors</li>
+            <li class="defect">Retry mechanism for temporary errors</li>
+            <li class="defect">Logs usage successfully</li>
+        </ul>
+        <h2>AIGenerator Error Handling (App\Tests\Functional\Controller\AIGeneratorErrorHandling)</h2>
+        <ul>
+            <li class="defect">Handles rate limit error</li>
+            <li class="defect">Handles insufficient quota error</li>
+            <li class="defect">Handles service unavailable</li>
+            <li class="defect">Handles monthly limit exceeded</li>
+            <li class="defect">Handles timeout error</li>
+        </ul>
+        <h2>AIGenerator With Credits (App\Tests\Functional\Controller\AIGeneratorWithCredits)</h2>
+        <ul>
+            <li class="defect">A i generation page shows user credits</li>
+            <li class="defect">Cannot generate with insufficient credits</li>
+            <li class="defect">Generation deducts credits</li>
+            <li class="success">Credits are refunded on generation error</li>
+            <li class="success">A i usage log is created on generation</li>
+            <li class="defect">Credit cost can be configured</li>
+            <li class="success">Multiple generations track credits correctly</li>
+            <li class="success">New user gets default credits</li>
+        </ul>
+        <h2>Admin Controller (App\Tests\Functional\Controller\AdminController)</h2>
+        <ul>
+            <li class="success">Admin dashboard requires authentication</li>
+            <li class="success">Regular user cannot access admin dashboard</li>
+            <li class="success">Admin can access dashboard</li>
+            <li class="defect">Dashboard displays correct statistics</li>
+            <li class="success">Dashboard shows recent transactions</li>
+            <li class="defect">Dashboard shows users with low credits</li>
+            <li class="success">Dashboard links to users and settings</li>
+            <li class="defect">Admin navigation menu shows admin link</li>
+            <li class="defect">Regular user does not see admin link</li>
+        </ul>
+        <h2>Admin User Controller (App\Tests\Functional\Controller\AdminUserController)</h2>
+        <ul>
+            <li class="defect">Users list requires admin role</li>
+            <li class="defect">Admin can view users list</li>
+            <li class="defect">Admin can view user details</li>
+            <li class="defect">Admin can add credits to user</li>
+            <li class="defect">Cannot add negative credits</li>
+            <li class="defect">Admin can toggle admin role for other users</li>
+            <li class="defect">Admin cannot toggle own admin role</li>
+            <li class="defect">User details shows correct statistics</li>
+            <li class="defect">Quick add credits modal</li>
+            <li class="defect">User cannot access other user details</li>
+        </ul>
+        <h2>Credit Service (App\Tests\Unit\Service\CreditService)</h2>
+        <ul>
+            <li class="success">Initialize user credits creates new credits with default amount</li>
+            <li class="success">Get user credits returns existing credits</li>
+            <li class="success">Get user credits creates new credits if not exist</li>
+            <li class="success">Has enough credits returns true when sufficient</li>
+            <li class="success">Has enough credits returns false when insufficient</li>
+            <li class="success">Charge credits deducts amount and creates transaction</li>
+            <li class="success">Charge credits throws exception when insufficient funds</li>
+            <li class="success">Grant credits adds amount and creates transaction</li>
+            <li class="success">Refund credits adds amount back and creates transaction</li>
+        </ul>
+        <h2>Credit Transaction (App\Tests\Unit\Entity\CreditTransaction)</h2>
+        <ul>
+            <li class="success">Constructor sets all values</li>
+            <li class="success">Constructor without optional parameters</li>
+            <li class="success">Transaction types</li>
+            <li class="success">Is debit returns true for negative amount</li>
+            <li class="success">Is credit returns true for positive amount</li>
+            <li class="success">Is debit and is credit for zero amount</li>
+            <li class="success">Metadata getter and setter</li>
+            <li class="success">Different transaction scenarios</li>
+            <li class="success">Getters return correct values</li>
+        </ul>
+        <h2>Deck (App\Tests\Unit\Entity\Deck)</h2>
+        <ul>
+            <li class="success">Getters and setters</li>
+            <li class="success">User association</li>
+            <li class="success">Flashcards collection</li>
+            <li class="success">Add same flashcard twice</li>
+            <li class="success">Remove non existent flashcard</li>
+            <li class="success">Deck with multiple flashcards</li>
+            <li class="success">Empty description</li>
+        </ul>
+        <h2>Flashcard (App\Tests\Unit\Entity\Flashcard)</h2>
+        <ul>
+            <li class="success">Getters and setters</li>
+            <li class="success">Deck association</li>
+            <li class="success">Long content</li>
+            <li class="success">Empty content</li>
+            <li class="success">Special characters</li>
+            <li class="success">Unicode content</li>
+            <li class="success">Html content</li>
+            <li class="success">Change deck</li>
+            <li class="success">Remove deck</li>
+            <li class="success">Multiline content</li>
+        </ul>
+        <h2>Flashcard Progress (App\Tests\Unit\Entity\FlashcardProgress)</h2>
+        <ul>
+            <li class="success">Initial state</li>
+            <li class="success">User association</li>
+            <li class="success">Flashcard association</li>
+            <li class="success">Study session association</li>
+            <li class="success">Setters and getters</li>
+            <li class="success">Increment total attempts</li>
+            <li class="success">Increment correct attempts</li>
+            <li class="success">Accuracy calculation</li>
+            <li class="success">Is due</li>
+            <li class="success">Ease factor bounds</li>
+            <li class="success">Quality values</li>
+            <li class="success">Progress after multiple reviews</li>
+        </ul>
+        <h2>Security Controller (App\Tests\Functional\SecurityController)</h2>
+        <ul>
+            <li class="success">Login page is accessible</li>
+            <li class="success">Login with valid credentials</li>
+            <li class="defect">Login with invalid password</li>
+            <li class="defect">Login with non existent email</li>
+            <li class="success">Register page is accessible</li>
+            <li class="defect">Successful registration</li>
+            <li class="defect">Registration with existing email</li>
+            <li class="defect">Registration with weak password</li>
+            <li class="defect">Logout</li>
+            <li class="defect">Access protected route without login</li>
+            <li class="defect">Access protected route after login</li>
+            <li class="defect">Public pages are accessible</li>
+        </ul>
+        <h2>Spaced Repetition Service (App\Tests\Unit\Service\SpacedRepetitionService)</h2>
+        <ul>
+            <li class="success">Calculate next review with perfect response</li>
+            <li class="success">Calculate next review with poor response</li>
+            <li class="success">Calculate next review with good response</li>
+            <li class="success">Progression of intervals</li>
+            <li class="success">Invalid quality throws exception</li>
+            <li class="success">Negative quality throws exception</li>
+            <li class="success">Get quality description</li>
+            <li class="success">Get due cards</li>
+            <li class="success">Calculate session stats</li>
+            <li class="success">Ease factor minimum</li>
+            <li class="success">Ease factor adjustment</li>
+        </ul>
+        <h2>Study Controller (App\Tests\Functional\StudyController)</h2>
+        <ul>
+            <li class="defect">Study index requires authentication</li>
+            <li class="defect">Study index shows decks with stats</li>
+            <li class="defect">Start study session</li>
+            <li class="defect">Cannot start session for other users deck</li>
+            <li class="defect">Study card display</li>
+            <li class="defect">Answer card</li>
+            <li class="defect">Complete session</li>
+            <li class="defect">Study history</li>
+            <li class="defect">No due cards redirect</li>
+            <li class="defect">Invalid quality answer</li>
+        </ul>
+        <h2>Study Session (App\Tests\Unit\Entity\StudySession)</h2>
+        <ul>
+            <li class="success">Initial state</li>
+            <li class="success">User association</li>
+            <li class="success">Deck association</li>
+            <li class="success">Setters and getters</li>
+            <li class="success">Increment reviewed cards</li>
+            <li class="success">Increment correct answers</li>
+            <li class="success">Accuracy calculation</li>
+            <li class="success">Flashcard progress collection</li>
+            <li class="success">Status values</li>
+            <li class="success">Perfect session</li>
+            <li class="success">Partial session</li>
+        </ul>
+        <h2>User (App\Tests\Unit\Entity\User)</h2>
+        <ul>
+            <li class="success">Getters and setters</li>
+            <li class="success">Roles</li>
+            <li class="success">Email verification</li>
+            <li class="success">Confirmation token</li>
+            <li class="success">Erase credentials</li>
+            <li class="success">Id is null initially</li>
+            <li class="success">Unique email</li>
+        </ul>
+        <h2>User Credits (App\Tests\Unit\Entity\UserCredits)</h2>
+        <ul>
+            <li class="success">Constructor sets initial values</li>
+            <li class="success">Add credits increases balance</li>
+            <li class="success">Add credits throws exception for negative amount</li>
+            <li class="success">Deduct credits decreases balance</li>
+            <li class="success">Deduct credits throws exception for negative amount</li>
+            <li class="success">Deduct credits throws exception for insufficient balance</li>
+            <li class="success">Has enough credits returns true when sufficient</li>
+            <li class="success">Has enough credits returns false when insufficient</li>
+            <li class="success">Multiple transactions calculate correctly</li>
+            <li class="success">Updated at changes on operations</li>
+            <li class="success">Getters return correct values</li>
+        </ul>
+    </body>
+</html>

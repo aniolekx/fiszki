@@ -33,25 +33,25 @@ final class Version20250813113302 extends AbstractMigration
             CREATE TABLE user_credits (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, balance INT NOT NULL, total_earned INT NOT NULL, total_spent INT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, UNIQUE INDEX UNIQ_191ACF74A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE ai_usage_logs ADD CONSTRAINT FK_3A038613A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)
+            ALTER TABLE ai_usage_logs ADD CONSTRAINT FK_3A038613A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)
         SQL);
         $this->addSql(<<<'SQL'
             ALTER TABLE ai_usage_logs ADD CONSTRAINT FK_3A038613BB9DBED7 FOREIGN KEY (generation_session_id) REFERENCES generation_session (id)
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE credit_transactions ADD CONSTRAINT FK_CC5D0006A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)
+            ALTER TABLE credit_transactions ADD CONSTRAINT FK_CC5D0006A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE credit_transactions ADD CONSTRAINT FK_CC5D00062E65C292 FOREIGN KEY (performed_by_id) REFERENCES users (id)
+            ALTER TABLE credit_transactions ADD CONSTRAINT FK_CC5D00062E65C292 FOREIGN KEY (performed_by_id) REFERENCES user (id)
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE system_settings ADD CONSTRAINT FK_8CAF1147896DBBDE FOREIGN KEY (updated_by_id) REFERENCES users (id)
+            ALTER TABLE system_settings ADD CONSTRAINT FK_8CAF1147896DBBDE FOREIGN KEY (updated_by_id) REFERENCES user (id)
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE user_credits ADD CONSTRAINT FK_191ACF74A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)
+            ALTER TABLE user_credits ADD CONSTRAINT FK_191ACF74A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE users ADD created_at DATETIME DEFAULT NULL
+            ALTER TABLE user ADD created_at DATETIME DEFAULT NULL
         SQL);
     }
 
@@ -89,7 +89,7 @@ final class Version20250813113302 extends AbstractMigration
             DROP TABLE user_credits
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE users DROP created_at
+            ALTER TABLE user DROP created_at
         SQL);
     }
 }

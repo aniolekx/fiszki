@@ -79,7 +79,7 @@
                                     </td>
                                     <td>
                                         {% if session.deck %}
-                                            <a href="{{ path('app_deck_show', {'id': session.deck.id}) }}">
+                                            <a href="{{ path('deck_show', {'id': session.deck.id}) }}">
                                                 {{ session.deck.name }}
                                             </a>
                                         {% else %}
