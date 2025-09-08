@@ -1,4 +1,4 @@
-FROM php:8.3.4-fpm
+FROM php:8.4.12-fpm
 
 # Instalacja zależności systemowych
 RUN apt-get update && apt-get install -y \
